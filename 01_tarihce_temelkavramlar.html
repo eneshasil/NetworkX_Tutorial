@@ -313,7 +313,7 @@ window.Quarto = {
 <section id="ilk-grafı-oluşturma" class="level2">
 <h2 class="anchored" data-anchor-id="ilk-grafı-oluşturma">İlk Grafı Oluşturma</h2>
 <p>İlk olarak NetworkX kütüphanesini içe aktarıyoruz ve boş bir <code>Graph</code> nesnesi oluşturuyoruz:</p>
-<div id="0f0ffa2a" class="cell" data-execution_count="1">
+<div id="7b448908" class="cell" data-execution_count="1">
 <details open="" class="code-fold">
 <summary>Kodu Göster</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> networkx <span class="im">as</span> nx</span>
@@ -338,7 +338,7 @@ window.Quarto = {
 <section id="tek-bir-düğüm-ekleme" class="level3">
 <h3 class="anchored" data-anchor-id="tek-bir-düğüm-ekleme">1. Tek Bir Düğüm Ekleme</h3>
 <p><code>add_node()</code> metodunu kullanarak tek bir düğüm ekleyebiliriz:</p>
-<div id="7209c62c" class="cell" data-execution_count="2">
+<div id="7ab103f1" class="cell" data-execution_count="2">
 <details open="" class="code-fold">
 <summary>Kodu Göster</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>G.add_node(<span class="dv">1</span>)</span></code></pre></div><button title="Panoya Kopyala" class="code-copy-button"><i class="bi"></i></button></div>
@@ -348,7 +348,7 @@ window.Quarto = {
 <section id="liste-veya-iteratör-ile-birden-fazla-düğüm-ekleme" class="level3">
 <h3 class="anchored" data-anchor-id="liste-veya-iteratör-ile-birden-fazla-düğüm-ekleme">2. Liste veya İteratör ile Birden Fazla Düğüm Ekleme</h3>
 <p><code>add_nodes_from()</code> metoduna bir Python listesi, kümesi veya aralığı (<code>range</code>) göndererek toplu düğüm eklemesi yapabiliriz:</p>
-<div id="9ff4734f" class="cell" data-execution_count="3">
+<div id="6616415a" class="cell" data-execution_count="3">
 <details open="" class="code-fold">
 <summary>Kodu Göster</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Bir liste ile düğüm ekleme</span></span>
@@ -368,7 +368,7 @@ window.Quarto = {
 <section id="diğer-graflardan-düğüm-çekme" class="level3">
 <h3 class="anchored" data-anchor-id="diğer-graflardan-düğüm-çekme">3. Diğer Graflardan Düğüm Çekme</h3>
 <p>Başka bir grafın düğümlerini de doğrudan grafımıza ekleyebiliriz:</p>
-<div id="bfee2af6" class="cell" data-execution_count="4">
+<div id="3bfb520a" class="cell" data-execution_count="4">
 <details open="" class="code-fold">
 <summary>Kodu Göster</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 10 düğümlü bir yol grafı (path graph) oluşturalım</span></span>
@@ -395,7 +395,7 @@ window.Quarto = {
 <section id="tek-bir-kenar-ekleme" class="level3">
 <h3 class="anchored" data-anchor-id="tek-bir-kenar-ekleme">1. Tek Bir Kenar Ekleme</h3>
 <p><code>add_edge()</code> metodunu kullanarak iki düğüm arasına bir bağlantı atarız:</p>
-<div id="f655a492" class="cell" data-execution_count="5">
+<div id="4c17833b" class="cell" data-execution_count="5">
 <details open="" class="code-fold">
 <summary>Kodu Göster</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>G.add_edge(<span class="dv">1</span>, <span class="dv">2</span>)</span></code></pre></div><button title="Panoya Kopyala" class="code-copy-button"><i class="bi"></i></button></div>
@@ -405,7 +405,7 @@ window.Quarto = {
 <section id="liste-veya-iteratör-ile-birden-fazla-kenar-ekleme" class="level3">
 <h3 class="anchored" data-anchor-id="liste-veya-iteratör-ile-birden-fazla-kenar-ekleme">2. Liste veya İteratör ile Birden Fazla Kenar Ekleme</h3>
 <p><code>add_edges_from()</code> metodu ile bir tuple listesi göndererek toplu bağlantılar oluşturabiliriz:</p>
-<div id="37f0ec8d" class="cell" data-execution_count="6">
+<div id="73643d69" class="cell" data-execution_count="6">
 <details open="" class="code-fold">
 <summary>Kodu Göster</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>G.add_edges_from([(<span class="dv">1</span>, <span class="dv">3</span>), (<span class="dv">2</span>, <span class="dv">4</span>), (<span class="dv">3</span>, <span class="dv">5</span>)])</span>
@@ -425,7 +425,7 @@ window.Quarto = {
 </blockquote>
 </div>
 <p>Bunu bir örnekle görelim:</p>
-<div id="0fa562da" class="cell" data-execution_count="7">
+<div id="a1626c42" class="cell" data-execution_count="7">
 <details open="" class="code-fold">
 <summary>Kodu Göster</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 99 ve 100 adında düğümlerimiz henüz yok</span></span>
@@ -452,7 +452,7 @@ Yeni kenarlar: [(1, 2), (1, 3), (2, 4), (3, 5), (99, 100)]</code></pre>
 <section id="temizleme" class="level2">
 <h2 class="anchored" data-anchor-id="temizleme">Temizleme</h2>
 <p>Grafı tamamen boşaltmak istiyorsak <code>clear()</code> metodunu çağırabiliriz. Bu işlem tüm düğümleri ve kenarları siler:</p>
-<div id="3fd1db80" class="cell" data-execution_count="8">
+<div id="d83e31eb" class="cell" data-execution_count="8">
 <details open="" class="code-fold">
 <summary>Kodu Göster</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Grafı temizle</span></span>

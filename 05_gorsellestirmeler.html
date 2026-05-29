@@ -268,7 +268,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="matplotlib-ile-statik-görselleştirme">1. Matplotlib ile Statik Görselleştirme</h2>
 <p>NetworkX, graf çizimleri için arka planda Python’ın popüler grafik kütüphanesi <strong>Matplotlib</strong>’i kullanır.</p>
 <p>İlk olarak 15 düğümlü bir tekerlek (<strong>Wheel</strong>) grafı oluşturalım. Tekerlek grafında merkezde bir “hub” düğüm bulunur ve bu düğüm çemberdeki diğer tüm düğümlere bağlıdır. Bu yapı, konumlandırma algoritmalarının farklarını görmek için harika bir örnektir:</p>
-<div id="386ba86c" class="cell" data-execution_count="1">
+<div id="ea84a9a8" class="cell" data-execution_count="1">
 <details open="" class="code-fold">
 <summary>Kodu Göster</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> networkx <span class="im">as</span> nx</span>
@@ -300,7 +300,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <img src="05_gorsellestirmeler_files/figure-html/fig-spring-output-1.png" width="691" height="499" class="figure-img">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-spring-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Şekil&nbsp;1: Spring (Yaylı/Fiziksel) Konumlandırma
+Şekil&nbsp;1: Spring Konumlandırma
 </figcaption>
 </figure>
 </div>
@@ -314,7 +314,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <img src="05_gorsellestirmeler_files/figure-html/fig-circular-output-1.png" width="691" height="499" class="figure-img">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-circular-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Şekil&nbsp;2: Dairesel (Circular) Konumlandırma
+Şekil&nbsp;2: Dairesel Konumlandırma
 </figcaption>
 </figure>
 </div>
@@ -326,7 +326,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="gelişmiş-özelleştirme" class="level3">
 <h3 class="anchored" data-anchor-id="gelişmiş-özelleştirme">Gelişmiş Özelleştirme</h3>
 <p>Düğümlerin boyutunu derecelerine göre, renklerini de özniteliklerine göre özelleştirerek daha anlamlı graflar elde edebiliriz:</p>
-<div id="9944faef" class="cell" data-execution_count="4">
+<div id="2ee10411" class="cell" data-execution_count="4">
 <details open="" class="code-fold">
 <summary>Kodu Göster</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Bir yıldız grafı oluşturalım</span></span>
@@ -368,7 +368,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="pyvis-ile-interaktif-ağ-görselleştirme">2. Pyvis ile İnteraktif Ağ Görselleştirme</h2>
 <p>Matplotlib harika statik görüntüler sunar ancak ağ büyüdükçe (örneğin 50+ düğüm) düğümler üst üste biner ve detayları okumak imkansızlaşır.</p>
 <p><strong>Pyvis</strong>, tarayıcıda çalışan, etkileşimli, animasyonlu ve tamamen fizik simülasyonu destekleyen ağlar oluşturmamızı sağlar.</p>
-<div id="f3810355" class="cell" data-execution_count="5">
+<div id="31c3905e" class="cell" data-execution_count="5">
 <details open="" class="code-fold">
 <summary>Kodu Göster</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyvis.network <span class="im">import</span> Network</span>
@@ -385,9 +385,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>    deg <span class="op">=</span> BA.degree(node)</span>
 <span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Düğüm boyutunu derecesine göre ayarlıyoruz</span></span>
 <span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>    size <span class="op">=</span> deg <span class="op">*</span> <span class="dv">5</span> <span class="op">+</span> <span class="dv">5</span></span>
-<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Düğümün üzerine fare ile gelince (hover) derece bilgisini gösterelim</span></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Düğümün üzerine fare ile gelince derece bilgisini gösterelim</span></span>
 <span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>    title <span class="op">=</span> <span class="ss">f"Düğüm </span><span class="sc">{</span>node<span class="sc">}</span><span class="ss"> - Derece: </span><span class="sc">{</span>deg<span class="sc">}</span><span class="ss">"</span></span>
-<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Düğüm rengini derecesine göre koyu yeşilden açık teal rengine ayarlayalım</span></span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Düğüm rengini dereceye göre değiştirelim</span></span>
 <span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>    color <span class="op">=</span> <span class="st">'#14B8A6'</span> <span class="cf">if</span> deg <span class="op">&gt;</span> <span class="dv">1</span> <span class="cf">else</span> <span class="st">'#10B981'</span></span>
 <span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>    </span>
 <span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>    net.add_node(node, label<span class="op">=</span><span class="bu">str</span>(node), size<span class="op">=</span>size, title<span class="op">=</span>title, color<span class="op">=</span>color)</span>
