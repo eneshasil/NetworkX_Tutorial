@@ -294,7 +294,7 @@ window.Quarto = {
 <section id="klasik-graf-yapıları" class="level3">
 <h3 class="anchored" data-anchor-id="klasik-graf-yapıları">1. Klasik Graf Yapıları</h3>
 <p>En sık karşılaşılan temel grafları hızlıca oluşturabiliriz:</p>
-<div id="ec408263" class="cell" data-execution_count="1">
+<div id="a43bc53f" class="cell" data-execution_count="1">
 <details open="" class="code-fold">
 <summary>Kodu Göster</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> networkx <span class="im">as</span> nx</span>
@@ -327,7 +327,7 @@ Halka Grafı (6 Düğümlü) Kenar Sayısı: 6</code></pre>
 </div>
 <p><span class="math inline">\(G(n, p)\)</span> modelinde <span class="math inline">\(n\)</span> adet düğüm oluşturulur ve her düğüm çifti arasına <span class="math inline">\(p\)</span> olasılığıyla rastgele bir kenar yerleştirilir.</p>
 </div>
-<div id="eac31339" class="cell" data-execution_count="2">
+<div id="7b79c030" class="cell" data-execution_count="2">
 <details open="" class="code-fold">
 <summary>Kodu Göster</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 50 düğümlü, düğümler arası bağlantı olasılığı %10 olan rastgele graf</span></span>
@@ -335,7 +335,7 @@ Halka Grafı (6 Düğümlü) Kenar Sayısı: 6</code></pre>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Erdős-Rényi - Düğümler: </span><span class="sc">{</span>ER<span class="sc">.</span>number_of_nodes()<span class="sc">}</span><span class="ss">, Kenarlar: </span><span class="sc">{</span>ER<span class="sc">.</span>number_of_edges()<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Panoya Kopyala" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-stdout">
-<pre><code>Erdős-Rényi - Düğümler: 50, Kenarlar: 137</code></pre>
+<pre><code>Erdős-Rényi - Düğümler: 50, Kenarlar: 126</code></pre>
 </div>
 </div>
 <div class="concept-card">
@@ -344,7 +344,7 @@ Halka Grafı (6 Düğümlü) Kenar Sayısı: 6</code></pre>
 </div>
 <p>Gerçek hayattaki ağların birçoğu (İnternet, sosyal ağlar, makale alıntıları) “Zengin daha da zenginleşir” kuralına göre büyür. Barabási-Albert (BA) modeli, derecesi yüksek düğümlerin yeni bağlantılar çekme olasılığının daha yüksek olduğu gerçekçi ağları simüle eder.</p>
 </div>
-<div id="54fc6693" class="cell" data-execution_count="3">
+<div id="cde0be8a" class="cell" data-execution_count="3">
 <details open="" class="code-fold">
 <summary>Kodu Göster</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 100 düğümlü, her yeni eklenen düğümün mevcut ağa 2 yeni kenar ile bağlandığı BA grafı</span></span>
@@ -362,7 +362,7 @@ Halka Grafı (6 Düğümlü) Kenar Sayısı: 6</code></pre>
 <h2 class="anchored" data-anchor-id="ağ-analiz-algoritmaları">Ağ Analiz Algoritmaları</h2>
 <p>NetworkX’in en büyük gücü barındırdığı yüzlerce algoritmadır. Burada ders notu kapsamında en popüler algoritmaları pratik bir şehir haritası ağı üzerinden inceleyelim.</p>
 <p>Aşağıdaki gibi bir şehir ulaşım grafı tanımlayalım:</p>
-<div id="6a4cdf1d" class="cell" data-execution_count="4">
+<div id="6178e7cc" class="cell" data-execution_count="4">
 <details open="" class="code-fold">
 <summary>Kodu Göster</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Şehirler arası mesafeler</span></span>
@@ -378,7 +378,7 @@ Halka Grafı (6 Düğümlü) Kenar Sayısı: 6</code></pre>
 <section id="en-kısa-yol-analizi-shortest-path---dijkstra" class="level3">
 <h3 class="anchored" data-anchor-id="en-kısa-yol-analizi-shortest-path---dijkstra">1. En Kısa Yol Analizi (Shortest Path - Dijkstra)</h3>
 <p>Dijkstra algoritmasını kullanarak İstanbul’dan Adana’ya giden en kısa mesafeli rotayı yol ağırlıklarını hesaba katarak bulalım:</p>
-<div id="1d1a4147" class="cell" data-execution_count="5">
+<div id="379f5c91" class="cell" data-execution_count="5">
 <details open="" class="code-fold">
 <summary>Kodu Göster</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># En kısa rotayı bulma </span></span>
@@ -400,7 +400,7 @@ Toplam Yol Mesafesi (km): 940</code></pre>
 <section id="a-derece-merkeziliği" class="level4">
 <h4 class="anchored" data-anchor-id="a-derece-merkeziliği">A) Derece Merkeziliği</h4>
 <p>Bir düğümün sahip olduğu komşu sayısına oranını hesaplar. En çok bağlantısı olan şehir en merkezidir.</p>
-<div id="25c257e1" class="cell" data-execution_count="6">
+<div id="d584b308" class="cell" data-execution_count="6">
 <details open="" class="code-fold">
 <summary>Kodu Göster</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>deg_centrality <span class="op">=</span> nx.degree_centrality(road_net)</span>
@@ -421,7 +421,7 @@ Toplam Yol Mesafesi (km): 940</code></pre>
 <section id="b-arasındalık-merkeziliği" class="level4">
 <h4 class="anchored" data-anchor-id="b-arasındalık-merkeziliği">B) Arasındalık Merkeziliği</h4>
 <p>Ağdaki tüm en kısa yolların ne kadarının ilgili düğümün üzerinden geçtiğini ölçer. Bir nevi köprü veya transit geçiş noktası görevini üstlenen düğümleri bulur.</p>
-<div id="2425e037" class="cell" data-execution_count="7">
+<div id="9bdabcec" class="cell" data-execution_count="7">
 <details open="" class="code-fold">
 <summary>Kodu Göster</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>bet_centrality <span class="op">=</span> nx.betweenness_centrality(road_net, weight<span class="op">=</span><span class="st">'weight'</span>)</span>
@@ -442,7 +442,7 @@ Toplam Yol Mesafesi (km): 940</code></pre>
 <section id="c-pagerank-merkeziliği" class="level4">
 <h4 class="anchored" data-anchor-id="c-pagerank-merkeziliği">C) PageRank Merkeziliği</h4>
 <p>Google’ın web sayfalarını sıralamak için geliştirdiği ünlü algoritmadır. Bir düğümün kalitesi ve önemi, ona bağlanan diğer düğümlerin önemi ile ölçülür.</p>
-<div id="fcfb1a1d" class="cell" data-execution_count="8">
+<div id="241514b5" class="cell" data-execution_count="8">
 <details open="" class="code-fold">
 <summary>Kodu Göster</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>pagerank_scores <span class="op">=</span> nx.pagerank(road_net, weight<span class="op">=</span><span class="st">'weight'</span>)</span>
