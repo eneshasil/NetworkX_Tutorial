@@ -13,7 +13,7 @@ NetworkX bu modeller için dört temel graf sınıfı sunar.
 ## NetworkX'teki 4 Temel Graf Sınıfı
 
 | Graf Sınıfı | Yönlü mü? | Çoklu Kenar İzin Verir mi? | Kendi Kendine Bağlantı (Self-loop) |
-|:----------------|:----------------:|:----------------:|:----------------:|
+|:---|:--:|:--:|:--:|
 | **`nx.Graph`** | Hayır | Hayır | Evet |
 | **`nx.DiGraph`** | Evet | Hayır | Evet |
 | **`nx.MultiGraph`** | Hayır | Evet | Evet |
@@ -120,4 +120,4 @@ print("Orijinal Yönsüz Kenar:", undirected_graph.edges())
 print("Yönlü Yeni Kenarlar:", directed.edges())
 ```
 
----
+------------------------------------------------------------------------

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="tr" xml:lang="tr"><head>
 
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.8.25">
@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Matplotlib ve Pyvis ile Görselleştirme – NetworkX Ders Notları</title>
+<title>Matplotlib ve Pyvis ile Görselleştirme – NetworkX Tutorial</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -59,7 +59,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
 <script src="site_libs/clipboard/clipboard.min.js"></script>
 <script src="site_libs/quarto-search/autocomplete.umd.js"></script>
 <script src="site_libs/quarto-search/fuse.min.js"></script>
@@ -75,7 +74,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-065a5179aebd64318d7ea99d77b64a9e.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-a53c0e355896b640b2084972ad579721.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-97e7c842cb487d44b4b140ea8fe4e7f2.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -90,17 +89,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   ],
   "show-item-context": false,
   "language": {
-    "search-no-results-text": "No results",
-    "search-matching-documents-text": "matching documents",
-    "search-copy-link-title": "Copy link to search",
-    "search-hide-matches-text": "Hide additional matches",
-    "search-more-match-text": "more match in this document",
-    "search-more-matches-text": "more matches in this document",
-    "search-clear-button-title": "Clear",
+    "search-no-results-text": "Sonuç yok",
+    "search-matching-documents-text": "eşleşen belgeler",
+    "search-copy-link-title": "Aramak için bağlantıyı kopyalayın",
+    "search-hide-matches-text": "Ek eşleşmeleri gizle",
+    "search-more-match-text": "bu belgede bir tane daha eşleşme",
+    "search-more-matches-text": "bu belgede daha fazla eşleşme",
+    "search-clear-button-title": "Temizle",
     "search-text-placeholder": "",
-    "search-detached-cancel-button-title": "Cancel",
-    "search-submit-button-title": "Submit",
-    "search-label": "Search"
+    "search-detached-cancel-button-title": "İptal et",
+    "search-submit-button-title": "Gönder",
+    "search-label": "Ara"
   }
 }</script>
 
@@ -118,11 +117,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <a href="./index.html" class="navbar-brand navbar-brand-logo">
     </a>
     <a class="navbar-brand" href="./index.html">
-    <span class="navbar-title">NetworkX Ders Notları</span>
+    <span class="navbar-title">NetworkX Tutorial</span>
     </a>
   </div>
-            <div id="quarto-search" class="" title="Search"></div>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+            <div id="quarto-search" class="" title="Ara"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Gezinmeyi değiştir" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
@@ -130,10 +129,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li class="nav-item">
     <a class="nav-link active" href="./index.html" aria-current="page"> 
 <span class="menu-text">Ana Sayfa</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="./about.html"> 
-<span class="menu-text">About</span></a>
   </li>  
 </ul>
           </div> <!-- /navcollapse -->
@@ -143,13 +138,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     </nav>
   <nav class="quarto-secondary-nav">
     <div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Kenar çubuğunu değiştir" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
         <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./01_tarihce_temelkavramlar.html">Ders İçeriği</a></li><li class="breadcrumb-item"><a href="./05_gorsellestirmeler.html">5. Görselleştirme &amp; İnteraktif Analiz</a></li></ol></nav>
-        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Kenar çubuğunu değiştir" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
-      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+      <button type="button" class="btn quarto-search-button" aria-label="Ara" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
     </div>
@@ -165,7 +160,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
         <div class="sidebar-search">
-        <div id="quarto-search" class="" title="Search"></div>
+        <div id="quarto-search" class="" title="Ara"></div>
         </div>
         </div>
     <div class="sidebar-menu-container"> 
@@ -180,7 +175,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
  <span class="menu-text">Ders İçeriği</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Bölümü değiştir">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -224,7 +219,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">On this page</h2>
+    <h2 id="toc-title">Bu sayfada</h2>
    
   <ul>
   <li><a href="#matplotlib-ile-statik-görselleştirme" id="toc-matplotlib-ile-statik-görselleştirme" class="nav-link active" data-scroll-target="#matplotlib-ile-statik-görselleştirme">1. Matplotlib ile Statik Görselleştirme</a>
@@ -273,14 +268,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="matplotlib-ile-statik-görselleştirme">1. Matplotlib ile Statik Görselleştirme</h2>
 <p>NetworkX, graf çizimleri için arka planda Python’ın popüler grafik kütüphanesi <strong>Matplotlib</strong>’i kullanır.</p>
 <p>İlk olarak 15 düğümlü bir tekerlek (<strong>Wheel</strong>) grafı oluşturalım. Tekerlek grafında merkezde bir “hub” düğüm bulunur ve bu düğüm çemberdeki diğer tüm düğümlere bağlıdır. Bu yapı, konumlandırma algoritmalarının farklarını görmek için harika bir örnektir:</p>
-<div id="f3682366" class="cell" data-execution_count="1">
+<div id="fc3a7a16" class="cell" data-execution_count="1">
 <details open="" class="code-fold">
 <summary>Kodu Göster</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> networkx <span class="im">as</span> nx</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Graf oluştur</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>G <span class="op">=</span> nx.wheel_graph(<span class="dv">15</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>G <span class="op">=</span> nx.wheel_graph(<span class="dv">15</span>)</span></code></pre></div><button title="Panoya Kopyala" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
 <section id="konumlandırma-algoritmaları" class="level3">
@@ -293,7 +288,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>nx.draw(G, pos<span class="op">=</span>pos_spring, with_labels<span class="op">=</span><span class="va">True</span>, node_color<span class="op">=</span><span class="st">'#14B8A6'</span>, edge_color<span class="op">=</span><span class="st">'gray'</span>)</span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Düğümleri düzgün bir daire üzerine dizer</span></span>
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>pos_circular <span class="op">=</span> nx.circular_layout(G)</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>nx.draw(G, pos<span class="op">=</span>pos_circular, with_labels<span class="op">=</span><span class="va">True</span>, node_color<span class="op">=</span><span class="st">'#10B981'</span>, edge_color<span class="op">=</span><span class="st">'gray'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>nx.draw(G, pos<span class="op">=</span>pos_circular, with_labels<span class="op">=</span><span class="va">True</span>, node_color<span class="op">=</span><span class="st">'#10B981'</span>, edge_color<span class="op">=</span><span class="st">'gray'</span>)</span></code></pre></div><button title="Panoya Kopyala" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="quarto-layout-panel" data-layout-ncol="2">
 <div class="quarto-layout-row">
@@ -305,7 +300,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <img src="05_gorsellestirmeler_files/figure-html/fig-spring-output-1.png" width="691" height="499" class="figure-img">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-spring-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;1: Spring (Yaylı/Fiziksel) Konumlandırma
+Şekil&nbsp;1: Spring Konumlandırma
 </figcaption>
 </figure>
 </div>
@@ -319,7 +314,7 @@ Figure&nbsp;1: Spring (Yaylı/Fiziksel) Konumlandırma
 <img src="05_gorsellestirmeler_files/figure-html/fig-circular-output-1.png" width="691" height="499" class="figure-img">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-circular-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;2: Dairesel (Circular) Konumlandırma
+Şekil&nbsp;2: Dairesel Konumlandırma
 </figcaption>
 </figure>
 </div>
@@ -331,7 +326,7 @@ Figure&nbsp;2: Dairesel (Circular) Konumlandırma
 <section id="gelişmiş-özelleştirme" class="level3">
 <h3 class="anchored" data-anchor-id="gelişmiş-özelleştirme">Gelişmiş Özelleştirme</h3>
 <p>Düğümlerin boyutunu derecelerine göre, renklerini de özniteliklerine göre özelleştirerek daha anlamlı graflar elde edebiliriz:</p>
-<div id="c4e57864" class="cell" data-execution_count="4">
+<div id="51e7af04" class="cell" data-execution_count="4">
 <details open="" class="code-fold">
 <summary>Kodu Göster</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Bir yıldız grafı oluşturalım</span></span>
@@ -356,7 +351,7 @@ Figure&nbsp;2: Dairesel (Circular) Konumlandırma
 <span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>        font_color<span class="op">=</span><span class="st">'white'</span>,</span>
 <span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>        font_weight<span class="op">=</span><span class="st">'bold'</span>)</span>
 <span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Derece Boyutlandırmalı Yıldız Grafı"</span>)</span>
-<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Panoya Kopyala" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-display">
 <div>
@@ -373,7 +368,7 @@ Figure&nbsp;2: Dairesel (Circular) Konumlandırma
 <h2 class="anchored" data-anchor-id="pyvis-ile-interaktif-ağ-görselleştirme">2. Pyvis ile İnteraktif Ağ Görselleştirme</h2>
 <p>Matplotlib harika statik görüntüler sunar ancak ağ büyüdükçe (örneğin 50+ düğüm) düğümler üst üste biner ve detayları okumak imkansızlaşır.</p>
 <p><strong>Pyvis</strong>, tarayıcıda çalışan, etkileşimli, animasyonlu ve tamamen fizik simülasyonu destekleyen ağlar oluşturmamızı sağlar.</p>
-<div id="7ee2890b" class="cell" data-execution_count="5">
+<div id="49f5ce6a" class="cell" data-execution_count="5">
 <details open="" class="code-fold">
 <summary>Kodu Göster</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyvis.network <span class="im">import</span> Network</span>
@@ -390,9 +385,9 @@ Figure&nbsp;2: Dairesel (Circular) Konumlandırma
 <span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>    deg <span class="op">=</span> BA.degree(node)</span>
 <span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Düğüm boyutunu derecesine göre ayarlıyoruz</span></span>
 <span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>    size <span class="op">=</span> deg <span class="op">*</span> <span class="dv">5</span> <span class="op">+</span> <span class="dv">5</span></span>
-<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Düğümün üzerine fare ile gelince (hover) derece bilgisini gösterelim</span></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Düğümün üzerine fare ile gelince derece bilgisini gösterelim</span></span>
 <span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>    title <span class="op">=</span> <span class="ss">f"Düğüm </span><span class="sc">{</span>node<span class="sc">}</span><span class="ss"> - Derece: </span><span class="sc">{</span>deg<span class="sc">}</span><span class="ss">"</span></span>
-<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Düğüm rengini derecesine göre koyu yeşilden açık teal rengine ayarlayalım</span></span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Düğüm rengini dereceye göre değiştirelim</span></span>
 <span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>    color <span class="op">=</span> <span class="st">'#14B8A6'</span> <span class="cf">if</span> deg <span class="op">&gt;</span> <span class="dv">1</span> <span class="cf">else</span> <span class="st">'#10B981'</span></span>
 <span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>    </span>
 <span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>    net.add_node(node, label<span class="op">=</span><span class="bu">str</span>(node), size<span class="op">=</span>size, title<span class="op">=</span>title, color<span class="op">=</span>color)</span>
@@ -405,7 +400,7 @@ Figure&nbsp;2: Dairesel (Circular) Konumlandırma
 <span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a>net.barnes_hut()</span>
 <span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a><span class="co"># Etkileşimli HTML sayfasını oluşturalım</span></span>
-<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a>net.write_html(<span class="st">'pyvis_graph.html'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a>net.write_html(<span class="st">'pyvis_graph.html'</span>)</span></code></pre></div><button title="Panoya Kopyala" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
 <section id="canlı-interaktif-simülasyon" class="level3">
@@ -445,12 +440,12 @@ Figure&nbsp;2: Dairesel (Circular) Konumlandırma
       // flash "checked"
       button.classList.add('code-copy-button-checked');
       var currentTitle = button.getAttribute("title");
-      button.setAttribute("title", "Copied!");
+      button.setAttribute("title", "Kopyalandı");
       let tooltip;
       if (window.bootstrap) {
         button.setAttribute("data-bs-toggle", "tooltip");
         button.setAttribute("data-bs-placement", "left");
-        button.setAttribute("data-bs-title", "Copied!");
+        button.setAttribute("data-bs-title", "Kopyalandı");
         tooltip = new bootstrap.Tooltip(button, 
           { trigger: "manual", 
             customClass: "code-copy-button-tooltip",
@@ -493,7 +488,7 @@ Figure&nbsp;2: Dairesel (Circular) Konumlandırma
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp('/' + window.location.host + '/');
+        var filterRegex = new RegExp("https:\/\/eneshasil\.github\.io\/NetworkX_Tutorial\/");
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }

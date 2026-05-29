@@ -2,7 +2,7 @@ project:
   type: website
   render:
     - index.qmd
-    - 01_concepts.qmd
+    - 01_tarihce_temelkavramlar.qmd
     - 02_elemanlar_oznitelikler.qmd
     - 03_graf_turleri.qmd
     - 04_uretecler_algoritmalar.qmd
@@ -13,7 +13,7 @@ lang: tr
 jupyter: python3
 
 website:
-  title: "NetworkX Ders Notları"
+  title: "NetworkX Tutorial"
   description: "IST5128 - Python ile NetworkX Kütüphanesi ve Ağ Analizi Ders Notları"
   navbar:
     background: dark

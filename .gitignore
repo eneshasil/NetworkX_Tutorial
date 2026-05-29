@@ -1,4 +1,59 @@
+# Virtual Environments
 /env/
+/venv/
+/.venv/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.ipynb_checkpoints/
+.pytest_cache/
+.cache/
+
+# Quarto / Jupyter
 /.quarto/
 **/*.quarto_ipynb
-.Rproj.user
+.jupyter_cache/
+jupyter_execute/
+
+# R
+.Rproj.user/
+.Rhistory
+.RData
+.Ruserdata
+
+# macOS System Files
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+.Spotlight-V100
+.Trashes
+
+# IDEs and Editors
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Secrets & Local Configurations
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+*.env
+*.env.local
+
+# Logs and Temporaries
+*.log
+*.tmp
+*.temp
+*~
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Node / Package Managers (In case of future web tooling additions)
+node_modules/

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="tr" xml:lang="tr"><head>
 
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.8.25">
@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Graf Üreteçleri &amp; Algoritmalar – NetworkX Ders Notları</title>
+<title>Graf Üreteçleri &amp; Algoritmalar – NetworkX Tutorial</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -59,7 +59,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
 <script src="site_libs/clipboard/clipboard.min.js"></script>
 <script src="site_libs/quarto-search/autocomplete.umd.js"></script>
 <script src="site_libs/quarto-search/fuse.min.js"></script>
@@ -75,7 +74,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-065a5179aebd64318d7ea99d77b64a9e.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-a53c0e355896b640b2084972ad579721.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-97e7c842cb487d44b4b140ea8fe4e7f2.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -90,17 +89,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   ],
   "show-item-context": false,
   "language": {
-    "search-no-results-text": "No results",
-    "search-matching-documents-text": "matching documents",
-    "search-copy-link-title": "Copy link to search",
-    "search-hide-matches-text": "Hide additional matches",
-    "search-more-match-text": "more match in this document",
-    "search-more-matches-text": "more matches in this document",
-    "search-clear-button-title": "Clear",
+    "search-no-results-text": "Sonuç yok",
+    "search-matching-documents-text": "eşleşen belgeler",
+    "search-copy-link-title": "Aramak için bağlantıyı kopyalayın",
+    "search-hide-matches-text": "Ek eşleşmeleri gizle",
+    "search-more-match-text": "bu belgede bir tane daha eşleşme",
+    "search-more-matches-text": "bu belgede daha fazla eşleşme",
+    "search-clear-button-title": "Temizle",
     "search-text-placeholder": "",
-    "search-detached-cancel-button-title": "Cancel",
-    "search-submit-button-title": "Submit",
-    "search-label": "Search"
+    "search-detached-cancel-button-title": "İptal et",
+    "search-submit-button-title": "Gönder",
+    "search-label": "Ara"
   }
 }</script>
 
@@ -147,11 +146,11 @@ window.Quarto = {
     <a href="./index.html" class="navbar-brand navbar-brand-logo">
     </a>
     <a class="navbar-brand" href="./index.html">
-    <span class="navbar-title">NetworkX Ders Notları</span>
+    <span class="navbar-title">NetworkX Tutorial</span>
     </a>
   </div>
-            <div id="quarto-search" class="" title="Search"></div>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+            <div id="quarto-search" class="" title="Ara"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Gezinmeyi değiştir" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
@@ -159,10 +158,6 @@ window.Quarto = {
   <li class="nav-item">
     <a class="nav-link active" href="./index.html" aria-current="page"> 
 <span class="menu-text">Ana Sayfa</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="./about.html"> 
-<span class="menu-text">About</span></a>
   </li>  
 </ul>
           </div> <!-- /navcollapse -->
@@ -172,13 +167,13 @@ window.Quarto = {
     </nav>
   <nav class="quarto-secondary-nav">
     <div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Kenar çubuğunu değiştir" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
         <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./01_tarihce_temelkavramlar.html">Ders İçeriği</a></li><li class="breadcrumb-item"><a href="./04_uretecler_algoritmalar.html">4. Graf Üreteçleri &amp; Algoritmalar</a></li></ol></nav>
-        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Kenar çubuğunu değiştir" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
-      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+      <button type="button" class="btn quarto-search-button" aria-label="Ara" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
     </div>
@@ -194,7 +189,7 @@ window.Quarto = {
       </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
         <div class="sidebar-search">
-        <div id="quarto-search" class="" title="Search"></div>
+        <div id="quarto-search" class="" title="Ara"></div>
         </div>
         </div>
     <div class="sidebar-menu-container"> 
@@ -209,7 +204,7 @@ window.Quarto = {
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
  <span class="menu-text">Ders İçeriği</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Bölümü değiştir">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -253,7 +248,7 @@ window.Quarto = {
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">On this page</h2>
+    <h2 id="toc-title">Bu sayfada</h2>
    
   <ul>
   <li><a href="#graf-üreteçleri" id="toc-graf-üreteçleri" class="nav-link active" data-scroll-target="#graf-üreteçleri">Graf Üreteçleri</a>
@@ -299,7 +294,7 @@ window.Quarto = {
 <section id="klasik-graf-yapıları" class="level3">
 <h3 class="anchored" data-anchor-id="klasik-graf-yapıları">1. Klasik Graf Yapıları</h3>
 <p>En sık karşılaşılan temel grafları hızlıca oluşturabiliriz:</p>
-<div id="d2b79e1f" class="cell" data-execution_count="1">
+<div id="a43bc53f" class="cell" data-execution_count="1">
 <details open="" class="code-fold">
 <summary>Kodu Göster</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> networkx <span class="im">as</span> nx</span>
@@ -314,7 +309,7 @@ window.Quarto = {
 <span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Halka (Cycle) Graf: Yol grafının uçlarının birleştiği kapalı yapı</span></span>
 <span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>C_6 <span class="op">=</span> nx.cycle_graph(<span class="dv">6</span>)</span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Halka Grafı (6 Düğümlü) Kenar Sayısı:"</span>, C_6.number_of_edges()) <span class="co"># N = 6</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Halka Grafı (6 Düğümlü) Kenar Sayısı:"</span>, C_6.number_of_edges()) <span class="co"># N = 6</span></span></code></pre></div><button title="Panoya Kopyala" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>Tam Graf (5 Düğümlü) Kenar Sayısı: 10
@@ -332,15 +327,15 @@ Halka Grafı (6 Düğümlü) Kenar Sayısı: 6</code></pre>
 </div>
 <p><span class="math inline">\(G(n, p)\)</span> modelinde <span class="math inline">\(n\)</span> adet düğüm oluşturulur ve her düğüm çifti arasına <span class="math inline">\(p\)</span> olasılığıyla rastgele bir kenar yerleştirilir.</p>
 </div>
-<div id="a9a09858" class="cell" data-execution_count="2">
+<div id="7b79c030" class="cell" data-execution_count="2">
 <details open="" class="code-fold">
 <summary>Kodu Göster</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 50 düğümlü, düğümler arası bağlantı olasılığı %10 (0.1) olan rastgele graf</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 50 düğümlü, düğümler arası bağlantı olasılığı %10 olan rastgele graf</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>ER <span class="op">=</span> nx.erdos_renyi_graph(<span class="dv">50</span>, <span class="fl">0.1</span>)</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Erdős-Rényi - Düğümler: </span><span class="sc">{</span>ER<span class="sc">.</span>number_of_nodes()<span class="sc">}</span><span class="ss">, Kenarlar: </span><span class="sc">{</span>ER<span class="sc">.</span>number_of_edges()<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Erdős-Rényi - Düğümler: </span><span class="sc">{</span>ER<span class="sc">.</span>number_of_nodes()<span class="sc">}</span><span class="ss">, Kenarlar: </span><span class="sc">{</span>ER<span class="sc">.</span>number_of_edges()<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Panoya Kopyala" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-stdout">
-<pre><code>Erdős-Rényi - Düğümler: 50, Kenarlar: 123</code></pre>
+<pre><code>Erdős-Rényi - Düğümler: 50, Kenarlar: 126</code></pre>
 </div>
 </div>
 <div class="concept-card">
@@ -349,12 +344,12 @@ Halka Grafı (6 Düğümlü) Kenar Sayısı: 6</code></pre>
 </div>
 <p>Gerçek hayattaki ağların birçoğu (İnternet, sosyal ağlar, makale alıntıları) “Zengin daha da zenginleşir” kuralına göre büyür. Barabási-Albert (BA) modeli, derecesi yüksek düğümlerin yeni bağlantılar çekme olasılığının daha yüksek olduğu gerçekçi ağları simüle eder.</p>
 </div>
-<div id="f6250306" class="cell" data-execution_count="3">
+<div id="cde0be8a" class="cell" data-execution_count="3">
 <details open="" class="code-fold">
 <summary>Kodu Göster</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 100 düğümlü, her yeni eklenen düğümün mevcut ağa 2 yeni kenar ile bağlandığı BA grafı</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>BA <span class="op">=</span> nx.barabasi_albert_graph(<span class="dv">100</span>, <span class="dv">2</span>)</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Barabási-Albert - Düğümler: </span><span class="sc">{</span>BA<span class="sc">.</span>number_of_nodes()<span class="sc">}</span><span class="ss">, Kenarlar: </span><span class="sc">{</span>BA<span class="sc">.</span>number_of_edges()<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Barabási-Albert - Düğümler: </span><span class="sc">{</span>BA<span class="sc">.</span>number_of_nodes()<span class="sc">}</span><span class="ss">, Kenarlar: </span><span class="sc">{</span>BA<span class="sc">.</span>number_of_edges()<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Panoya Kopyala" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>Barabási-Albert - Düğümler: 100, Kenarlar: 196</code></pre>
@@ -367,23 +362,23 @@ Halka Grafı (6 Düğümlü) Kenar Sayısı: 6</code></pre>
 <h2 class="anchored" data-anchor-id="ağ-analiz-algoritmaları">Ağ Analiz Algoritmaları</h2>
 <p>NetworkX’in en büyük gücü barındırdığı yüzlerce algoritmadır. Burada ders notu kapsamında en popüler algoritmaları pratik bir şehir haritası ağı üzerinden inceleyelim.</p>
 <p>Aşağıdaki gibi bir şehir ulaşım grafı tanımlayalım:</p>
-<div id="38f6b1fd" class="cell" data-execution_count="4">
+<div id="6178e7cc" class="cell" data-execution_count="4">
 <details open="" class="code-fold">
 <summary>Kodu Göster</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Şehirler arası mesafeler (Ağırlıklar)</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Şehirler arası mesafeler</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>road_net <span class="op">=</span> nx.Graph()</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>road_net.add_edge(<span class="st">'İstanbul'</span>, <span class="st">'Ankara'</span>, weight<span class="op">=</span><span class="dv">450</span>)</span>
 <span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>road_net.add_edge(<span class="st">'İstanbul'</span>, <span class="st">'İzmir'</span>, weight<span class="op">=</span><span class="dv">480</span>)</span>
 <span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>road_net.add_edge(<span class="st">'Ankara'</span>, <span class="st">'İzmir'</span>, weight<span class="op">=</span><span class="dv">580</span>)</span>
 <span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>road_net.add_edge(<span class="st">'Ankara'</span>, <span class="st">'Adana'</span>, weight<span class="op">=</span><span class="dv">490</span>)</span>
 <span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>road_net.add_edge(<span class="st">'İzmir'</span>, <span class="st">'Antalya'</span>, weight<span class="op">=</span><span class="dv">350</span>)</span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>road_net.add_edge(<span class="st">'Antalya'</span>, <span class="st">'Adana'</span>, weight<span class="op">=</span><span class="dv">320</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>road_net.add_edge(<span class="st">'Antalya'</span>, <span class="st">'Adana'</span>, weight<span class="op">=</span><span class="dv">320</span>)</span></code></pre></div><button title="Panoya Kopyala" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
 <section id="en-kısa-yol-analizi-shortest-path---dijkstra" class="level3">
 <h3 class="anchored" data-anchor-id="en-kısa-yol-analizi-shortest-path---dijkstra">1. En Kısa Yol Analizi (Shortest Path - Dijkstra)</h3>
 <p>Dijkstra algoritmasını kullanarak İstanbul’dan Adana’ya giden en kısa mesafeli rotayı yol ağırlıklarını hesaba katarak bulalım:</p>
-<div id="e0dbf4df" class="cell" data-execution_count="5">
+<div id="379f5c91" class="cell" data-execution_count="5">
 <details open="" class="code-fold">
 <summary>Kodu Göster</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># En kısa rotayı bulma </span></span>
@@ -391,7 +386,7 @@ Halka Grafı (6 Düğümlü) Kenar Sayısı: 6</code></pre>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>shortest_length <span class="op">=</span> nx.dijkstra_path_length(road_net, source<span class="op">=</span><span class="st">'İstanbul'</span>, target<span class="op">=</span><span class="st">'Adana'</span>, weight<span class="op">=</span><span class="st">'weight'</span>)</span>
 <span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"İstanbul -&gt; Adana En Kısa Rota:"</span>, shortest_route)</span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Toplam Yol Mesafesi (km):"</span>, shortest_length)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Toplam Yol Mesafesi (km):"</span>, shortest_length)</span></code></pre></div><button title="Panoya Kopyala" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>İstanbul -&gt; Adana En Kısa Rota: ['İstanbul', 'Ankara', 'Adana']
@@ -405,13 +400,13 @@ Toplam Yol Mesafesi (km): 940</code></pre>
 <section id="a-derece-merkeziliği" class="level4">
 <h4 class="anchored" data-anchor-id="a-derece-merkeziliği">A) Derece Merkeziliği</h4>
 <p>Bir düğümün sahip olduğu komşu sayısına oranını hesaplar. En çok bağlantısı olan şehir en merkezidir.</p>
-<div id="92764c07" class="cell" data-execution_count="6">
+<div id="d584b308" class="cell" data-execution_count="6">
 <details open="" class="code-fold">
 <summary>Kodu Göster</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>deg_centrality <span class="op">=</span> nx.degree_centrality(road_net)</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Derece Merkezilikleri:"</span>)</span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> sehir, score <span class="kw">in</span> deg_centrality.items():</span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f" - </span><span class="sc">{</span>sehir<span class="sc">}</span><span class="ss">: </span><span class="sc">{</span>score<span class="sc">:.2f}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f" - </span><span class="sc">{</span>sehir<span class="sc">}</span><span class="ss">: </span><span class="sc">{</span>score<span class="sc">:.2f}</span><span class="ss">"</span>)</span></code></pre></div><button title="Panoya Kopyala" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>Derece Merkezilikleri:
@@ -426,16 +421,16 @@ Toplam Yol Mesafesi (km): 940</code></pre>
 <section id="b-arasındalık-merkeziliği" class="level4">
 <h4 class="anchored" data-anchor-id="b-arasındalık-merkeziliği">B) Arasındalık Merkeziliği</h4>
 <p>Ağdaki tüm en kısa yolların ne kadarının ilgili düğümün üzerinden geçtiğini ölçer. Bir nevi köprü veya transit geçiş noktası görevini üstlenen düğümleri bulur.</p>
-<div id="8975ce1c" class="cell" data-execution_count="7">
+<div id="9bdabcec" class="cell" data-execution_count="7">
 <details open="" class="code-fold">
 <summary>Kodu Göster</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>bet_centrality <span class="op">=</span> nx.betweenness_centrality(road_net, weight<span class="op">=</span><span class="st">'weight'</span>)</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Arasındalık Merkezilikleri (Köprü Şehirler):"</span>)</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Arasındalık Merkezilikleri:"</span>)</span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> sehir, score <span class="kw">in</span> bet_centrality.items():</span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f" - </span><span class="sc">{</span>sehir<span class="sc">}</span><span class="ss">: </span><span class="sc">{</span>score<span class="sc">:.2f}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f" - </span><span class="sc">{</span>sehir<span class="sc">}</span><span class="ss">: </span><span class="sc">{</span>score<span class="sc">:.2f}</span><span class="ss">"</span>)</span></code></pre></div><button title="Panoya Kopyala" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-stdout">
-<pre><code>Arasındalık Merkezilikleri (Köprü Şehirler):
+<pre><code>Arasındalık Merkezilikleri:
  - İstanbul: 0.00
  - Ankara: 0.17
  - İzmir: 0.17
@@ -447,13 +442,13 @@ Toplam Yol Mesafesi (km): 940</code></pre>
 <section id="c-pagerank-merkeziliği" class="level4">
 <h4 class="anchored" data-anchor-id="c-pagerank-merkeziliği">C) PageRank Merkeziliği</h4>
 <p>Google’ın web sayfalarını sıralamak için geliştirdiği ünlü algoritmadır. Bir düğümün kalitesi ve önemi, ona bağlanan diğer düğümlerin önemi ile ölçülür.</p>
-<div id="1e4a4c51" class="cell" data-execution_count="8">
+<div id="241514b5" class="cell" data-execution_count="8">
 <details open="" class="code-fold">
 <summary>Kodu Göster</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>pagerank_scores <span class="op">=</span> nx.pagerank(road_net, weight<span class="op">=</span><span class="st">'weight'</span>)</span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"PageRank Skorları:"</span>)</span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> sehir, score <span class="kw">in</span> pagerank_scores.items():</span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f" - </span><span class="sc">{</span>sehir<span class="sc">}</span><span class="ss">: </span><span class="sc">{</span>score<span class="sc">:.2f}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f" - </span><span class="sc">{</span>sehir<span class="sc">}</span><span class="ss">: </span><span class="sc">{</span>score<span class="sc">:.2f}</span><span class="ss">"</span>)</span></code></pre></div><button title="Panoya Kopyala" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>PageRank Skorları:
@@ -497,12 +492,12 @@ Toplam Yol Mesafesi (km): 940</code></pre>
       // flash "checked"
       button.classList.add('code-copy-button-checked');
       var currentTitle = button.getAttribute("title");
-      button.setAttribute("title", "Copied!");
+      button.setAttribute("title", "Kopyalandı");
       let tooltip;
       if (window.bootstrap) {
         button.setAttribute("data-bs-toggle", "tooltip");
         button.setAttribute("data-bs-placement", "left");
-        button.setAttribute("data-bs-title", "Copied!");
+        button.setAttribute("data-bs-title", "Kopyalandı");
         tooltip = new bootstrap.Tooltip(button, 
           { trigger: "manual", 
             customClass: "code-copy-button-tooltip",
@@ -545,7 +540,7 @@ Toplam Yol Mesafesi (km): 940</code></pre>
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp('/' + window.location.host + '/');
+        var filterRegex = new RegExp("https:\/\/eneshasil\.github\.io\/NetworkX_Tutorial\/");
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }

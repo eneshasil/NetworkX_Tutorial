@@ -2,6 +2,7 @@
 title: "Eleman İnceleme & Öznitelikler"
 jupyter: python3
 ---
+
 Bir ağ oluşturduktan sonra, ağın elemanlarını (düğümler, kenarlar, dereceler) sorgulamamız ve bu elemanlara ek özellikler eklememiz gerekir. NetworkX bunun için oldukça güçlü ve esnek araçlar sunar.
 
 ------------------------------------------------------------------------
@@ -145,4 +146,4 @@ net.add_edge(2, 4, weight=7.5)
 print("Kadıköy - Beşiktaş arası ağırlık (mesafe):", net.edges[2, 4]['weight'])
 ```
 
----
+------------------------------------------------------------------------

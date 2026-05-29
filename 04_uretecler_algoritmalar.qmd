@@ -43,7 +43,7 @@ $G(n, p)$ modelinde $n$ adet düğüm oluşturulur ve her düğüm çifti arası
 ::::
 
 ```{python}
-# 50 düğümlü, düğümler arası bağlantı olasılığı %10 (0.1) olan rastgele graf
+# 50 düğümlü, düğümler arası bağlantı olasılığı %10 olan rastgele graf
 ER = nx.erdos_renyi_graph(50, 0.1)
 print(f"Erdős-Rényi - Düğümler: {ER.number_of_nodes()}, Kenarlar: {ER.number_of_edges()}")
 ```
@@ -71,7 +71,7 @@ NetworkX'in en büyük gücü barındırdığı yüzlerce algoritmadır. Burada 
 Aşağıdaki gibi bir şehir ulaşım grafı tanımlayalım:
 
 ```{python}
-# Şehirler arası mesafeler (Ağırlıklar)
+# Şehirler arası mesafeler
 road_net = nx.Graph()
 road_net.add_edge('İstanbul', 'Ankara', weight=450)
 road_net.add_edge('İstanbul', 'İzmir', weight=480)
@@ -115,7 +115,7 @@ Ağdaki tüm en kısa yolların ne kadarının ilgili düğümün üzerinden ge�
 
 ```{python}
 bet_centrality = nx.betweenness_centrality(road_net, weight='weight')
-print("Arasındalık Merkezilikleri (Köprü Şehirler):")
+print("Arasındalık Merkezilikleri:")
 for sehir, score in bet_centrality.items():
     print(f" - {sehir}: {score:.2f}")
 ```
@@ -131,4 +131,4 @@ for sehir, score in pagerank_scores.items():
     print(f" - {sehir}: {score:.2f}")
 ```
 
----
+------------------------------------------------------------------------

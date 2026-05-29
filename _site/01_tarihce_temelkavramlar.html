@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="tr" xml:lang="tr"><head>
 
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.8.25">
@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Tarihçe &amp; Temel Kavramlar – NetworkX Ders Notları</title>
+<title>Tarihçe &amp; Temel Kavramlar – NetworkX Tutorial</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -59,7 +59,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
 <script src="site_libs/clipboard/clipboard.min.js"></script>
 <script src="site_libs/quarto-search/autocomplete.umd.js"></script>
 <script src="site_libs/quarto-search/fuse.min.js"></script>
@@ -75,7 +74,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-065a5179aebd64318d7ea99d77b64a9e.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-a53c0e355896b640b2084972ad579721.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-97e7c842cb487d44b4b140ea8fe4e7f2.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -90,17 +89,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   ],
   "show-item-context": false,
   "language": {
-    "search-no-results-text": "No results",
-    "search-matching-documents-text": "matching documents",
-    "search-copy-link-title": "Copy link to search",
-    "search-hide-matches-text": "Hide additional matches",
-    "search-more-match-text": "more match in this document",
-    "search-more-matches-text": "more matches in this document",
-    "search-clear-button-title": "Clear",
+    "search-no-results-text": "Sonuç yok",
+    "search-matching-documents-text": "eşleşen belgeler",
+    "search-copy-link-title": "Aramak için bağlantıyı kopyalayın",
+    "search-hide-matches-text": "Ek eşleşmeleri gizle",
+    "search-more-match-text": "bu belgede bir tane daha eşleşme",
+    "search-more-matches-text": "bu belgede daha fazla eşleşme",
+    "search-clear-button-title": "Temizle",
     "search-text-placeholder": "",
-    "search-detached-cancel-button-title": "Cancel",
-    "search-submit-button-title": "Submit",
-    "search-label": "Search"
+    "search-detached-cancel-button-title": "İptal et",
+    "search-submit-button-title": "Gönder",
+    "search-label": "Ara"
   }
 }</script>
 
@@ -147,11 +146,11 @@ window.Quarto = {
     <a href="./index.html" class="navbar-brand navbar-brand-logo">
     </a>
     <a class="navbar-brand" href="./index.html">
-    <span class="navbar-title">NetworkX Ders Notları</span>
+    <span class="navbar-title">NetworkX Tutorial</span>
     </a>
   </div>
-            <div id="quarto-search" class="" title="Search"></div>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+            <div id="quarto-search" class="" title="Ara"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Gezinmeyi değiştir" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
@@ -159,10 +158,6 @@ window.Quarto = {
   <li class="nav-item">
     <a class="nav-link active" href="./index.html" aria-current="page"> 
 <span class="menu-text">Ana Sayfa</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="./about.html"> 
-<span class="menu-text">About</span></a>
   </li>  
 </ul>
           </div> <!-- /navcollapse -->
@@ -172,13 +167,13 @@ window.Quarto = {
     </nav>
   <nav class="quarto-secondary-nav">
     <div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Kenar çubuğunu değiştir" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
         <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./01_tarihce_temelkavramlar.html">Ders İçeriği</a></li><li class="breadcrumb-item"><a href="./01_tarihce_temelkavramlar.html">1. Tarihçe &amp; Temel Kavramlar</a></li></ol></nav>
-        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Kenar çubuğunu değiştir" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
-      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+      <button type="button" class="btn quarto-search-button" aria-label="Ara" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
     </div>
@@ -194,7 +189,7 @@ window.Quarto = {
       </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
         <div class="sidebar-search">
-        <div id="quarto-search" class="" title="Search"></div>
+        <div id="quarto-search" class="" title="Ara"></div>
         </div>
         </div>
     <div class="sidebar-menu-container"> 
@@ -209,7 +204,7 @@ window.Quarto = {
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
  <span class="menu-text">Ders İçeriği</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Bölümü değiştir">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -234,13 +229,13 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./04_uretecler_algoritmalar.qmd" class="sidebar-item-text sidebar-link">
+  <a href="./04_uretecler_algoritmalar.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">4. Graf Üreteçleri &amp; Algoritmalar</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./05_gorsellestirmeler.qmd" class="sidebar-item-text sidebar-link">
+  <a href="./05_gorsellestirmeler.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">5. Görselleştirme &amp; İnteraktif Analiz</span></a>
   </div>
 </li>
@@ -253,7 +248,7 @@ window.Quarto = {
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">On this page</h2>
+    <h2 id="toc-title">Bu sayfada</h2>
    
   <ul>
   <li><a href="#graf-teorisinin-tarihçesi-königsbergin-yedi-köprüsü" id="toc-graf-teorisinin-tarihçesi-königsbergin-yedi-köprüsü" class="nav-link active" data-scroll-target="#graf-teorisinin-tarihçesi-königsbergin-yedi-köprüsü">Graf Teorisinin Tarihçesi: Königsberg’in Yedi Köprüsü</a></li>
@@ -298,14 +293,14 @@ window.Quarto = {
 
 <section id="graf-teorisinin-tarihçesi-königsbergin-yedi-köprüsü" class="level2">
 <h2 class="anchored" data-anchor-id="graf-teorisinin-tarihçesi-königsbergin-yedi-köprüsü">Graf Teorisinin Tarihçesi: Königsberg’in Yedi Köprüsü</h2>
-<p>Graf teorisi, 18. yüzyılda İsviçreli ünlü matematikçi <strong>Leonhard Euler</strong>’in çözdüğü meşhur bir bulmaca ile doğmuştur: <strong>Königsberg’in Yedi Köprüsü</strong> (Seven Bridges of Königsberg) problemi.</p>
+<p>Graf teorisi, 18. yüzyılda İsviçreli ünlü matematikçi <strong>Leonhard Euler</strong>’in çözdüğü meşhur bir bulmaca ile doğmuştur: <strong>Königsberg’in Yedi Köprüsü</strong> problemi.</p>
 <p>Königsberg şehri (günümüzde Rusya’ya bağlı Kaliningrad), Pregel Nehri’nin her iki yakasını ve nehir üzerindeki iki büyük adayı birbirine bağlayan yedi köprüye sahipti. Şehir sakinleri şu sorunun cevabını merak ediyordu:</p>
 <blockquote class="blockquote">
 <p><em>“Şehirdeki herhangi bir noktadan başlayıp, yedi köprünün her birinden tam olarak bir kez geçerek tüm şehri dolaşmak ve başlanılan noktaya geri dönmek mümkün müdür?”</em></p>
 </blockquote>
-<p>Euler, 1736 yılında bu problemin imkansız olduğunu matematiksel olarak kanıtladı. Problemi çözerken, karaları <strong>düğümlere (nodes / vertices)</strong>, köprüleri ise bu karaları birbirine bağlayan <strong>kenarlara (edges / links)</strong> dönüştürdü. Böylece tarihteki ilk grafı (ağı) modelledi.</p>
-<p>Euler, bir düğümden geçip gitmek için o düğüme bir kenardan girip diğer kenardan çıkılması gerektiğini fark etti. Dolayısıyla, başlangıç ve bitiş düğümleri hariç, tüm düğümlerin bağlı olduğu kenar sayısının (yani düğüm derecelerinin - <em>degree</em>) <strong>çift sayı</strong> olması gerekiyordu. Königsberg’deki karaların (düğümlerin) kenar sayıları incelendiğinde sırasıyla 3, 3, 3 ve 5 olduğu (hepsinin tek sayı olduğu) görüldü. Bu durum, böyle bir yürüyüşün (Euler Yolu / Euler Path) imkansız olduğunu gösteriyordu.</p>
-<p>Bu problem ve Euler’in sunduğu çözüm yöntemi, modern <strong>Graf Teorisi</strong> (Graph Theory) ve <strong>Topoloji</strong> bilim dallarının resmi başlangıcı olarak kabul edilir.</p>
+<p>Euler, 1736 yılında bu problemin imkansız olduğunu matematiksel olarak kanıtladı. Problemi çözerken, karaları <strong>düğümlere (nodes / vertices)</strong>, köprüleri ise bu karaları birbirine bağlayan <strong>kenarlara (edges / links)</strong> dönüştürdü. Böylece tarihteki ilk grafı modelledi.</p>
+<p>Euler, bir düğümden geçip gitmek için o düğüme bir kenardan girip diğer kenardan çıkılması gerektiğini fark etti. Dolayısıyla, başlangıç ve bitiş düğümleri hariç, tüm düğümlerin bağlı olduğu kenar sayısının <strong>çift sayı</strong> olması gerekiyordu. Königsberg’deki karaların kenar sayıları incelendiğinde sırasıyla 3, 3, 3 ve 5 olduğu görüldü. Bu durum, böyle bir yürüyüşün imkansız olduğunu gösteriyordu.</p>
+<p>Bu problem ve Euler’in sunduğu çözüm yöntemi, modern <strong>Graf Teorisi</strong> ve <strong>Topoloji</strong> bilim dallarının resmi başlangıcı olarak kabul edilir.</p>
 <p><img src="resimler/image-57.png" class="img-fluid" alt="Königsberg’in Yedi Köprüsü Haritası ve Graf Modeli"> :::</p>
 <hr>
 </section>
@@ -318,7 +313,7 @@ window.Quarto = {
 <section id="ilk-grafı-oluşturma" class="level2">
 <h2 class="anchored" data-anchor-id="ilk-grafı-oluşturma">İlk Grafı Oluşturma</h2>
 <p>İlk olarak NetworkX kütüphanesini içe aktarıyoruz ve boş bir <code>Graph</code> nesnesi oluşturuyoruz:</p>
-<div id="2b70bd01" class="cell" data-execution_count="1">
+<div id="62f441aa" class="cell" data-execution_count="1">
 <details open="" class="code-fold">
 <summary>Kodu Göster</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> networkx <span class="im">as</span> nx</span>
@@ -326,7 +321,7 @@ window.Quarto = {
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Boş bir yönsüz graf oluşturma</span></span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>G <span class="op">=</span> nx.Graph()</span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">type</span>(G))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">type</span>(G))</span></code></pre></div><button title="Panoya Kopyala" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>&lt;class 'networkx.classes.graph.Graph'&gt;</code></pre>
@@ -336,24 +331,24 @@ window.Quarto = {
 </section>
 <section id="düğümler" class="level2">
 <h2 class="anchored" data-anchor-id="düğümler">Düğümler</h2>
-<p>Oluşturduğumuz <code>G</code> grafına düğümler eklemenin farklı yolları vardır. NetworkX oldukça esnektir; Python’da <strong>hashable</strong> (yani değiştirilemez ve benzersiz şekilde indekslenebilir) olan neredeyse her nesne bir düğüm olabilir.</p>
+<p>Oluşturduğumuz <code>$G$</code> grafına düğümler eklemenin farklı yolları vardır. NetworkX oldukça esnektir; Python’da <strong>hashable</strong> (yani değiştirilemez ve benzersiz şekilde indekslenebilir) olan neredeyse her nesne bir düğüm olabilir.</p>
 <blockquote class="blockquote">
 <p><strong>None Nesnesi İstisnası:</strong> Python’ın <code>None</code> nesnesi NetworkX’te bir düğüm olarak <strong>kullanılamaz</strong>. Birçok fonksiyonun isteğe bağlı parametre atamalarında kontrol amaçlı kullanıldığı için kütüphane tarafından düğüm olarak kabul edilmez.</p>
 </blockquote>
 <section id="tek-bir-düğüm-ekleme" class="level3">
 <h3 class="anchored" data-anchor-id="tek-bir-düğüm-ekleme">1. Tek Bir Düğüm Ekleme</h3>
 <p><code>add_node()</code> metodunu kullanarak tek bir düğüm ekleyebiliriz:</p>
-<div id="09f132d3" class="cell" data-execution_count="2">
+<div id="531fc549" class="cell" data-execution_count="2">
 <details open="" class="code-fold">
 <summary>Kodu Göster</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>G.add_node(<span class="dv">1</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>G.add_node(<span class="dv">1</span>)</span></code></pre></div><button title="Panoya Kopyala" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
 </section>
 <section id="liste-veya-iteratör-ile-birden-fazla-düğüm-ekleme" class="level3">
 <h3 class="anchored" data-anchor-id="liste-veya-iteratör-ile-birden-fazla-düğüm-ekleme">2. Liste veya İteratör ile Birden Fazla Düğüm Ekleme</h3>
 <p><code>add_nodes_from()</code> metoduna bir Python listesi, kümesi veya aralığı (<code>range</code>) göndererek toplu düğüm eklemesi yapabiliriz:</p>
-<div id="50c0ac8f" class="cell" data-execution_count="3">
+<div id="063ddb24" class="cell" data-execution_count="3">
 <details open="" class="code-fold">
 <summary>Kodu Göster</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Bir liste ile düğüm ekleme</span></span>
@@ -363,7 +358,7 @@ window.Quarto = {
 <span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>G.add_nodes_from(<span class="bu">range</span>(<span class="dv">4</span>, <span class="dv">7</span>))</span>
 <span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Mevcut düğümleri görelim</span></span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Graftaki Düğümler:"</span>, G.nodes())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Graftaki Düğümler:"</span>, G.nodes())</span></code></pre></div><button title="Panoya Kopyala" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>Graftaki Düğümler: [1, 2, 3, 4, 5, 6]</code></pre>
@@ -373,7 +368,7 @@ window.Quarto = {
 <section id="diğer-graflardan-düğüm-çekme" class="level3">
 <h3 class="anchored" data-anchor-id="diğer-graflardan-düğüm-çekme">3. Diğer Graflardan Düğüm Çekme</h3>
 <p>Başka bir grafın düğümlerini de doğrudan grafımıza ekleyebiliriz:</p>
-<div id="200cecae" class="cell" data-execution_count="4">
+<div id="a6f02a8e" class="cell" data-execution_count="4">
 <details open="" class="code-fold">
 <summary>Kodu Göster</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 10 düğümlü bir yol grafı (path graph) oluşturalım</span></span>
@@ -382,7 +377,7 @@ window.Quarto = {
 <span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co"># H grafının düğümlerini G'ye ekleyelim</span></span>
 <span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>G.add_nodes_from(H)</span>
 <span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"G'nin yeni düğümleri:"</span>, G.nodes())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"G'nin yeni düğümleri:"</span>, G.nodes())</span></code></pre></div><button title="Panoya Kopyala" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>G'nin yeni düğümleri: [1, 2, 3, 4, 5, 6, 0, 7, 8, 9]</code></pre>
@@ -400,22 +395,22 @@ window.Quarto = {
 <section id="tek-bir-kenar-ekleme" class="level3">
 <h3 class="anchored" data-anchor-id="tek-bir-kenar-ekleme">1. Tek Bir Kenar Ekleme</h3>
 <p><code>add_edge()</code> metodunu kullanarak iki düğüm arasına bir bağlantı atarız:</p>
-<div id="de5cec02" class="cell" data-execution_count="5">
+<div id="8521ed40" class="cell" data-execution_count="5">
 <details open="" class="code-fold">
 <summary>Kodu Göster</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>G.add_edge(<span class="dv">1</span>, <span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>G.add_edge(<span class="dv">1</span>, <span class="dv">2</span>)</span></code></pre></div><button title="Panoya Kopyala" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
 </section>
 <section id="liste-veya-iteratör-ile-birden-fazla-kenar-ekleme" class="level3">
 <h3 class="anchored" data-anchor-id="liste-veya-iteratör-ile-birden-fazla-kenar-ekleme">2. Liste veya İteratör ile Birden Fazla Kenar Ekleme</h3>
 <p><code>add_edges_from()</code> metodu ile bir tuple listesi göndererek toplu bağlantılar oluşturabiliriz:</p>
-<div id="37d30951" class="cell" data-execution_count="6">
+<div id="f36268c5" class="cell" data-execution_count="6">
 <details open="" class="code-fold">
 <summary>Kodu Göster</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>G.add_edges_from([(<span class="dv">1</span>, <span class="dv">3</span>), (<span class="dv">2</span>, <span class="dv">4</span>), (<span class="dv">3</span>, <span class="dv">5</span>)])</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Graftaki Kenarlar:"</span>, G.edges())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Graftaki Kenarlar:"</span>, G.edges())</span></code></pre></div><button title="Panoya Kopyala" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>Graftaki Kenarlar: [(1, 2), (1, 3), (2, 4), (3, 5)]</code></pre>
@@ -430,7 +425,7 @@ window.Quarto = {
 </blockquote>
 </div>
 <p>Bunu bir örnekle görelim:</p>
-<div id="9d512950" class="cell" data-execution_count="7">
+<div id="9473368d" class="cell" data-execution_count="7">
 <details open="" class="code-fold">
 <summary>Kodu Göster</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 99 ve 100 adında düğümlerimiz henüz yok</span></span>
@@ -442,7 +437,7 @@ window.Quarto = {
 <span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Şimdi kontrol edelim</span></span>
 <span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"99 düğümde var mı?:"</span>, <span class="dv">99</span> <span class="kw">in</span> G)</span>
 <span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"100 düğümde var mı?:"</span>, <span class="dv">100</span> <span class="kw">in</span> G)</span>
-<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Yeni kenarlar:"</span>, G.edges())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Yeni kenarlar:"</span>, G.edges())</span></code></pre></div><button title="Panoya Kopyala" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>99 düğümde var mı?: False
@@ -457,14 +452,14 @@ Yeni kenarlar: [(1, 2), (1, 3), (2, 4), (3, 5), (99, 100)]</code></pre>
 <section id="temizleme" class="level2">
 <h2 class="anchored" data-anchor-id="temizleme">Temizleme</h2>
 <p>Grafı tamamen boşaltmak istiyorsak <code>clear()</code> metodunu çağırabiliriz. Bu işlem tüm düğümleri ve kenarları siler:</p>
-<div id="d28382e3" class="cell" data-execution_count="8">
+<div id="34ed213d" class="cell" data-execution_count="8">
 <details open="" class="code-fold">
 <summary>Kodu Göster</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Grafı temizle</span></span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>G.clear()</span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Düğümler:"</span>, G.nodes())</span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Kenarlar:"</span>, G.edges())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Kenarlar:"</span>, G.edges())</span></code></pre></div><button title="Panoya Kopyala" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>Düğümler: []
@@ -502,12 +497,12 @@ Kenarlar: []</code></pre>
       // flash "checked"
       button.classList.add('code-copy-button-checked');
       var currentTitle = button.getAttribute("title");
-      button.setAttribute("title", "Copied!");
+      button.setAttribute("title", "Kopyalandı");
       let tooltip;
       if (window.bootstrap) {
         button.setAttribute("data-bs-toggle", "tooltip");
         button.setAttribute("data-bs-placement", "left");
-        button.setAttribute("data-bs-title", "Copied!");
+        button.setAttribute("data-bs-title", "Kopyalandı");
         tooltip = new bootstrap.Tooltip(button, 
           { trigger: "manual", 
             customClass: "code-copy-button-tooltip",
@@ -550,7 +545,7 @@ Kenarlar: []</code></pre>
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp('/' + window.location.host + '/');
+        var filterRegex = new RegExp("https:\/\/eneshasil\.github\.io\/NetworkX_Tutorial\/");
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }

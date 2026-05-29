@@ -35,7 +35,7 @@ NetworkX, düğümleri ekrana nasıl yerleştireceğini belirleyen çeşitli kon
 ::: {layout-ncol="2"}
 ```{python}
 #| label: fig-spring
-#| fig-cap: "Spring (Yaylı/Fiziksel) Konumlandırma"
+#| fig-cap: "Spring Konumlandırma"
 # Düğümleri esnek yaylar gibi konumlandırır (varsayılan)
 pos_spring = nx.spring_layout(G, seed=42)
 nx.draw(G, pos=pos_spring, with_labels=True, node_color='#14B8A6', edge_color='gray')
@@ -43,7 +43,7 @@ nx.draw(G, pos=pos_spring, with_labels=True, node_color='#14B8A6', edge_color='g
 
 ```{python}
 #| label: fig-circular
-#| fig-cap: "Dairesel (Circular) Konumlandırma"
+#| fig-cap: "Dairesel Konumlandırma"
 # Düğümleri düzgün bir daire üzerine dizer
 pos_circular = nx.circular_layout(G)
 nx.draw(G, pos=pos_circular, with_labels=True, node_color='#10B981', edge_color='gray')
@@ -104,9 +104,9 @@ for node in BA.nodes():
     deg = BA.degree(node)
     # Düğüm boyutunu derecesine göre ayarlıyoruz
     size = deg * 5 + 5
-    # Düğümün üzerine fare ile gelince (hover) derece bilgisini gösterelim
+    # Düğümün üzerine fare ile gelince derece bilgisini gösterelim
     title = f"Düğüm {node} - Derece: {deg}"
-    # Düğüm rengini derecesine göre koyu yeşilden açık teal rengine ayarlayalım
+    # Düğüm rengini dereceye göre değiştirelim
     color = '#14B8A6' if deg > 1 else '#10B981'
     
     net.add_node(node, label=str(node), size=size, title=title, color=color)
@@ -130,4 +130,4 @@ Yukarıdaki kod tarafından derlenen, düğümlerini sürükleyip bırakabilece�
 
 </iframe>
 
----
+------------------------------------------------------------------------
