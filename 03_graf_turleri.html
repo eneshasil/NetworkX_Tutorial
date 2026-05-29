@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Graf Türleri – NetworkX Ders Notları</title>
+<title>Graf Türleri – NetworkX Tutorial</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -117,7 +117,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <a href="./index.html" class="navbar-brand navbar-brand-logo">
     </a>
     <a class="navbar-brand" href="./index.html">
-    <span class="navbar-title">NetworkX Ders Notları</span>
+    <span class="navbar-title">NetworkX Tutorial</span>
     </a>
   </div>
             <div id="quarto-search" class="" title="Ara"></div>
@@ -312,7 +312,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="yönsüz-graflar-nx.graph" class="level2">
 <h2 class="anchored" data-anchor-id="yönsüz-graflar-nx.graph">1. Yönsüz Graflar (<code>nx.Graph</code>)</h2>
 <p>Daha önceki bölümlerde kullandığımız varsayılan sınıftır. İlişkiler simetriktir. Yani <code>(A, B)</code> arasındaki bağlantı, aynı zamanda <code>(B, A)</code> bağlantısı demektir.</p>
-<div id="baba6453" class="cell" data-execution_count="1">
+<div id="767784e0" class="cell" data-execution_count="1">
 <details open="" class="code-fold">
 <summary>Kodu Göster</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> networkx <span class="im">as</span> nx</span>
@@ -330,7 +330,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="yönlü-graflar-nx.digraph" class="level2">
 <h2 class="anchored" data-anchor-id="yönlü-graflar-nx.digraph">2. Yönlü Graflar (<code>nx.DiGraph</code>)</h2>
 <p>Asimetrik ilişkileri modellemek için kullanılır. Bağlantılar bir kaynaktan bir hedefe doğrudur (Instagram’da takip etme gibi).</p>
-<div id="fd223915" class="cell" data-execution_count="2">
+<div id="409e196b" class="cell" data-execution_count="2">
 <details open="" class="code-fold">
 <summary>Kodu Göster</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Yönlü graf oluşturma</span></span>
@@ -349,7 +349,7 @@ Bağlantı var mı (B -&gt; A): False</code></pre>
 <section id="yönlü-graflarda-özel-metotlar" class="level3">
 <h3 class="anchored" data-anchor-id="yönlü-graflarda-özel-metotlar">Yönlü Graflarda Özel Metotlar</h3>
 <p>Yönlü graflarda düğümlerin giriş ve çıkış dereceleri ile öncülleri ve ardılları ayrı ayrı incelenir.</p>
-<div id="66d7b654" class="cell" data-execution_count="3">
+<div id="baa16173" class="cell" data-execution_count="3">
 <details open="" class="code-fold">
 <summary>Kodu Göster</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>DG.add_edges_from([(<span class="st">'A'</span>, <span class="st">'C'</span>), (<span class="st">'B'</span>, <span class="st">'C'</span>), (<span class="st">'C'</span>, <span class="st">'D'</span>)])</span>
@@ -377,7 +377,7 @@ C'den bağlanan düğümler (Ardıllar): ['D']</code></pre>
 <section id="çoklu-kenarlı-graflar-nx.multigraph-nx.multidigraph" class="level2">
 <h2 class="anchored" data-anchor-id="çoklu-kenarlı-graflar-nx.multigraph-nx.multidigraph">3. Çoklu Kenarlı Graflar (<code>nx.MultiGraph</code> &amp; <code>nx.MultiDiGraph</code>)</h2>
 <p>İki düğüm arasında birden fazla farklı ilişki veya paralel hat tanımlamak istendiğinde kullanılır (İki havaalanı arasındaki farklı havayolu uçuşlarını modellemek gibi).</p>
-<div id="613ae407" class="cell" data-execution_count="4">
+<div id="5d9d6561" class="cell" data-execution_count="4">
 <details open="" class="code-fold">
 <summary>Kodu Göster</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Çoklu kenarlı yönsüz graf</span></span>
@@ -400,7 +400,7 @@ C'den bağlanan düğümler (Ardıllar): ['D']</code></pre>
 <section id="yönlü-grafı-yönsüze-dönüştürme-to_undirected" class="level3">
 <h3 class="anchored" data-anchor-id="yönlü-grafı-yönsüze-dönüştürme-to_undirected">Yönlü Grafı Yönsüze Dönüştürme (<code>to_undirected()</code>)</h3>
 <p>Dönüşüm esnasında yön okları kalkar. Eğer çift yönlü bağlantı varsa (<code>A -&gt; B</code> ve <code>B -&gt; A</code>), bunlar yönsüz tek bir kenarda (<code>A - B</code>) birleştirilir.</p>
-<div id="7eaf585d" class="cell" data-execution_count="5">
+<div id="13bdbe45" class="cell" data-execution_count="5">
 <details open="" class="code-fold">
 <summary>Kodu Göster</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Yönlü graf oluşturma</span></span>
@@ -422,7 +422,7 @@ Yönsüz Yeni Kenarlar: [('A', 'B'), ('B', 'C')]</code></pre>
 <section id="yönsüz-grafı-yönlüye-dönüştürme-to_directed" class="level3">
 <h3 class="anchored" data-anchor-id="yönsüz-grafı-yönlüye-dönüştürme-to_directed">Yönsüz Grafı Yönlüye Dönüştürme (<code>to_directed()</code>)</h3>
 <p>Her bir yönsüz kenar (<code>A - B</code>), iki adet yönlü kenara (<code>A -&gt; B</code> ve <code>B -&gt; A</code>) dönüştürülür.</p>
-<div id="0052eaa9" class="cell" data-execution_count="6">
+<div id="41f8052f" class="cell" data-execution_count="6">
 <details open="" class="code-fold">
 <summary>Kodu Göster</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Yönsüz graf</span></span>
