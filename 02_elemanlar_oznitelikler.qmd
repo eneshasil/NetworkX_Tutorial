@@ -1,0 +1,148 @@
+---
+title: "Eleman İnceleme & Öznitelikler"
+jupyter: python3
+---
+Bir ağ oluşturduktan sonra, ağın elemanlarını (düğümler, kenarlar, dereceler) sorgulamamız ve bu elemanlara ek özellikler eklememiz gerekir. NetworkX bunun için oldukça güçlü ve esnek araçlar sunar.
+
+------------------------------------------------------------------------
+
+## Grafın Elemanlarını İnceleme
+
+NetworkX, grafın güncel durumunu izlemek için Set-like Views adı verilen veri yapıları kullanır. Bu yapılar salt-okunurdur ve graf güncellendikçe otomatik olarak güncellenirler.
+
+İlk olarak üzerinde çalışacağımız temel bir graf oluşturalım:
+
+```{python}
+import networkx as nx
+
+G = nx.Graph()
+G.add_edges_from([(1, 2), (1, 3), (2, 4), (3, 4)])
+```
+
+### 1. Düğümleri ve Kenarları İnceleme
+
+Düğümleri `G.nodes` ve kenarları `G.edges` ile sorgularız:
+
+```{python}
+print("Düğümler:", G.nodes)
+print("Kenarlar:", G.edges)
+```
+
+### 2. Komşulukları (Adjacency) Sorgulama
+
+> **Komşuluk:** Graf teoride üç çeşit komşuluk vardır:
+
+1.  **düğüm - düğüm komuşuluğu:** $G=(V,E)$ bir graf ve $v_1,v_2 \in V$ olsun. Eğer $e=\{v_1,v_2\}$ olacak şekilde $e\in E$ varsa $v_1$ ve $v_2$ komşu düğümlerdir denir.
+
+2.  **kenar - kenar komşuluğu:** $G=(V,E)$ bir graf ve $e_1,e_2 \in E$ olsun. Eğer $v \in e_1$ ve $v \in e_2$ olacak şekilde $v \in V$ varsa $e_1$ ve $e_2$ komşu kenarlardır denir.
+
+3.  **düğüm - kenar komşuluğu:** $G=(V,E)$ bir graf ve $v \in V$, $e \in E$ olsun. Eğer $v \in e$ ise $v$ ve $e$ komşudur denir.
+
+Bir düğümün bağlı olduğu diğer düğümleri (komşularını) görmek için `G.adj` veya `G[düğüm_id]` yapısını kullanırız:
+
+```{python}
+# 1 nolu düğümün komşuları
+print("1 nolu düğümün komşuları:", G[1])
+
+# 2 nolu düğümün komşuları
+print("2 nolu düğümün komşuları:", G.adj[2])
+```
+
+### 3. Dereceleri Sorgulama
+
+> **Bir düğümün derecesi:** $G=(V,E)$ bir graf olsun. $v$ düğümünün derecesi $v$'ye bitişik olan kendinden bağımsız döngü kenarlarının sayısına, $v$'deki kendine döngü kenarlarının sayısının iki katının eklenmesiyle elde edilir. $deg(v)$ ile gösterilir. $$deg(v)= |\{e \in E : \exists v \in V: e = \{u,v\}\}| + 2 * |\{e \in E : e=\{v\}\}|$$
+
+```{python}
+# Tüm düğümlerin dereceleri
+print("Tüm Dereceler:", G.degree)
+
+# Belirli bir düğümün derecesi
+print("1 nolu düğümün derecesi:", G.degree[1])
+```
+
+------------------------------------------------------------------------
+
+## Öznitelikler
+
+Ağları gerçek hayattaki karmaşık sistemleri modellemek için kullandığımızda düğümlerin ve kenarların sadece sayılardan ibaret olmaması gerekir. Örneğin:
+
+-   **Düğüm Öznitelikleri:** Bir sosyal ağda düğümlerin "İsim", "Yaş", "Ülke" gibi bilgileri olmalıdır.
+
+-   **Kenar Öznitelikleri:** Yol ağındaki kenarların "Uzaklık (Ağırlık)", "Hız Sınırı", "Yol Türü" gibi bilgileri olmalıdır.
+
+-   **Graf Öznitelikleri:** Tüm ağı tanımlayan "Tarih", "Ağ İsmi" gibi meta veriler olmalıdır.
+
+NetworkX'te tüm bu bilgiler arka planda **Python sözlükleri (dictionary)** olarak tutulur.
+
+### 1. Graf Öznitelikleri
+
+Bir grafın kendisine ait genel bilgileri tanımlamak için kullanılır:
+
+```{python}
+# Tanımlama esnasında öznitelik ekleme
+net = nx.Graph(isim="Şehir Metro Ağı", ulke="Türkiye")
+print("Graf Öznitelikleri:", net.graph)
+
+# Sonradan öznitelik ekleme/güncelleme
+net.graph['tarih'] = '2026-05-15'
+print("Güncel Öznitelikler:", net.graph)
+```
+
+### 2. Düğüm Öznitelikleri
+
+Düğümlere özel nitelikler eklemenin yolları:
+
+```{python}
+# Düğümü eklerken nitelik tanımlama
+net.add_node(1, isim="Taksim", tur="İstasyon")
+
+# Mevcut bir düğüme nitelik ekleme
+net.add_node(2)
+net.nodes[2]['isim'] = "Kadıköy"
+net.nodes[2]['tur'] = "İstasyon"
+
+# Toplu düğüm eklerken öznitelikleriyle ekleme (tuple listesi kullanarak)
+net.add_nodes_from([
+    (3, {"isim": "Ortaköy", "tur": "Vapur İskelesi"}),
+    (4, {"isim": "Beşiktaş", "tur": "Merkez"})
+])
+
+# Düğüm özniteliklerini görüntüleme
+print("Düğümler ve Nitelikleri:\n", list(net.nodes.data()))
+```
+
+### 3. Kenar Öznitelikleri & Ağırlık
+
+Kenarlara nitelik atamak, özellikle yol/mesafe veya bağlantı gücü gibi durumları modellemek için kritiktir:
+
+```{python}
+# Kenarı eklerken nitelik tanımlama (Örn: Ağırlık/Mesafe)
+net.add_edge(1, 2, mesafe=3.2, ulasim="Metro")
+
+# Toplu kenar eklerken nitelik tanımlama (u, v, dict) yapısı
+net.add_edges_from([
+    (1, 3, {"mesafe": 5.1, "ulasim": "Otobüs"}),
+    (3, 4, {"mesafe": 2.0, "ulasim": "Vapur"})
+])
+
+# Mevcut bir kenarın özniteliğini değiştirme
+net.edges[1, 2]['ulasim'] = "Metro & Tünel"
+
+# Kenar niteliklerini görüntüleme
+print("Kenarlar ve Nitelikleri:\n", list(net.edges.data()))
+```
+
+Özel Öznitelik: 'weight' (Ağırlık)
+
+NetworkX algoritma kütüphanelerinde (örneğin en kısa yol algoritmalarında) kenarların arasındaki mesafeyi veya bağlantı gücünü temsil eden **`weight`** (ağırlık) özniteliği özel bir yere sahiptir. Algoritmaların çoğu aksi belirtilmedikçe bu isimdeki değişkene göre hesaplama yapar.
+
+Bir kenara ağırlık tanımlama örneği:
+
+```{python}
+net.add_edge(2, 4, weight=7.5)
+
+# Ağırlık değerini doğrudan okuma
+print("Kadıköy - Beşiktaş arası ağırlık (mesafe):", net.edges[2, 4]['weight'])
+```
+
+---

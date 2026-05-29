@@ -1,0 +1,133 @@
+---
+title: "Matplotlib ve Pyvis ile Görselleştirme"
+subtitle: "Ağları Görselleştirme Teknikleri ve Dinamik Fizik Simülasyonları"
+jupyter: python3
+---
+
+Ağ analizinde verileri görselleştirmek, sayısal analizlerden göremeyeceğimiz yapısal örüntüleri (örneğin gruplaşmaları, merkezleri) tek bakışta anlamamızı sağlar.
+
+Bu bölümde iki farklı yöntemi inceleyeceğiz:
+
+1.  **Matplotlib:** Statik ve yayın kalitesinde hızlı graflar için.
+
+2.  **Pyvis:** Tarayıcıda doğrudan düğümleri tutup sürükleyebileceğimiz, yakınlaşabileceğimiz, tamamen **etkileşimli ve fizik motoru barındıran** dinamik web grafları için.
+
+------------------------------------------------------------------------
+
+## 1. Matplotlib ile Statik Görselleştirme
+
+NetworkX, graf çizimleri için arka planda Python'ın popüler grafik kütüphanesi **Matplotlib**'i kullanır.
+
+İlk olarak 15 düğümlü bir tekerlek (**Wheel**) grafı oluşturalım. Tekerlek grafında merkezde bir "hub" düğüm bulunur ve bu düğüm çemberdeki diğer tüm düğümlere bağlıdır. Bu yapı, konumlandırma algoritmalarının farklarını görmek için harika bir örnektir:
+
+```{python}
+import networkx as nx
+import matplotlib.pyplot as plt
+
+# Graf oluştur
+G = nx.wheel_graph(15)
+```
+
+### Konumlandırma Algoritmaları
+
+NetworkX, düğümleri ekrana nasıl yerleştireceğini belirleyen çeşitli konumlandırma algoritmaları barındırır. `pos` değişkeni düğümlerin 2 boyutlu koordinat sözlüğünü tutar.
+
+::: {layout-ncol="2"}
+```{python}
+#| label: fig-spring
+#| fig-cap: "Spring (Yaylı/Fiziksel) Konumlandırma"
+# Düğümleri esnek yaylar gibi konumlandırır (varsayılan)
+pos_spring = nx.spring_layout(G, seed=42)
+nx.draw(G, pos=pos_spring, with_labels=True, node_color='#14B8A6', edge_color='gray')
+```
+
+```{python}
+#| label: fig-circular
+#| fig-cap: "Dairesel (Circular) Konumlandırma"
+# Düğümleri düzgün bir daire üzerine dizer
+pos_circular = nx.circular_layout(G)
+nx.draw(G, pos=pos_circular, with_labels=True, node_color='#10B981', edge_color='gray')
+```
+:::
+
+### Gelişmiş Özelleştirme
+
+Düğümlerin boyutunu derecelerine göre, renklerini de özniteliklerine göre özelleştirerek daha anlamlı graflar elde edebiliriz:
+
+```{python}
+# Bir yıldız grafı oluşturalım
+star = nx.star_graph(8)
+
+# Merkez düğüm 0'dır, komşuları 1-8. Derecelerini hesaplayalım
+degrees = [star.degree(node) for node in star.nodes()]
+
+# Derecelere göre boyut belirleyelim (derece ne kadar büyükse düğüm o kadar büyük olsun)
+node_sizes = [d * 300 for d in degrees]
+
+# Derecesi en yüksek olanı kırmızı, diğerlerini mavi yapalım
+node_colors = ['#EF4444' if d == max(degrees) else '#3B82F6' for d in degrees]
+
+# Çizdirelim
+plt.figure(figsize=(8, 6))
+nx.draw(star, 
+        with_labels=True, 
+        node_size=node_sizes, 
+        node_color=node_colors, 
+        edge_color='#94A3B8', 
+        font_color='white',
+        font_weight='bold')
+plt.title("Derece Boyutlandırmalı Yıldız Grafı")
+plt.show()
+```
+
+------------------------------------------------------------------------
+
+## 2. Pyvis ile İnteraktif Ağ Görselleştirme
+
+Matplotlib harika statik görüntüler sunar ancak ağ büyüdükçe (örneğin 50+ düğüm) düğümler üst üste biner ve detayları okumak imkansızlaşır.
+
+**Pyvis**, tarayıcıda çalışan, etkileşimli, animasyonlu ve tamamen fizik simülasyonu destekleyen ağlar oluşturmamızı sağlar.
+
+```{python}
+#| output: false
+from pyvis.network import Network
+import networkx as nx
+
+# 30 düğümlü bir BA grafı oluşturalım
+BA = nx.barabasi_albert_graph(30, 1)
+
+# Pyvis Ağı tanımlayalım 
+net = Network(height='500px', width='100%', bgcolor='#0F172A', font_color='white')
+
+# NetworkX grafını Pyvis nesnesine aktaralım ve özniteliklerini optimize edelim
+for node in BA.nodes():
+    deg = BA.degree(node)
+    # Düğüm boyutunu derecesine göre ayarlıyoruz
+    size = deg * 5 + 5
+    # Düğümün üzerine fare ile gelince (hover) derece bilgisini gösterelim
+    title = f"Düğüm {node} - Derece: {deg}"
+    # Düğüm rengini derecesine göre koyu yeşilden açık teal rengine ayarlayalım
+    color = '#14B8A6' if deg > 1 else '#10B981'
+    
+    net.add_node(node, label=str(node), size=size, title=title, color=color)
+
+# Kenarları ekleyelim
+for edge in BA.edges():
+    net.add_edge(edge[0], edge[1], color='#475569')
+
+# Fiziksel dinamikleri aktif edelim 
+net.barnes_hut()
+
+# Etkileşimli HTML sayfasını oluşturalım
+net.write_html('pyvis_graph.html')
+```
+
+### Canlı İnteraktif Simülasyon
+
+Yukarıdaki kod tarafından derlenen, düğümlerini sürükleyip bırakabileceğiniz canlı etkileşimli graf aşağıdadır:
+
+<iframe src="pyvis_graph.html" width="100%" height="500px" style="border: 2px solid #1E293B; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); background-color: #0F172A;">
+
+</iframe>
+
+---

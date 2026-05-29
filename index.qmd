@@ -1,0 +1,62 @@
+---
+title: "NetworkX Tutorial"
+subtitle: "IST5128 - Veri Analizi ve Veri Görselleştirme"
+date: today
+date-format: "DD.MM.YYYY"
+author: 
+  - name: "Abdullah Enes Haşıl (255B7018)"
+jupyter: python3
+---
+
+### Ders Notlarına Hoş Geldiniz!
+Bu ders notları, Python'da **NetworkX** kütüphanesini adım adım öğrenmeniz için tasarlanmıştır. Notlar boyunca teorik kavramları, pratik kod bloklarını ve etkileşimli ağ görselleştirmelerini bir arada inceleyeceğiz.
+
+---
+
+## Ders Notlarının İçeriği
+
+1. Graf Teorisinin temel kavramları.
+2. Düğümler (Nodes), kenarlar (Edges), öznitelikler (attributes). 
+3. Yönlü (directed) ve yönsüz (undirected) ağ yapıları.
+4. Temel ağ algoritmaları (En kısa yol, merkezilik vb.).
+5. **Matplotlib** ve tarayıcı içi fizik tabanlı interaktif **Pyvis** kütüphanesi ile görselleştirmeler.
+
+---
+
+## Başlıklar
+
+Aşağıdaki bağlantıları kullanarak sırasıyla ders modüllerine geçiş yapabilirsiniz:
+
+### [1. Bölüm: Tarihçe & Temel Kavramlar](01_concepts.qmd)
+Graf Teorisinin tarihçesi, NetworkX graf nesnesi oluşturma, düğüm ve kenar ekleme yöntemleri.
+
+---
+
+### [2. Bölüm: Eleman İnceleme & Öznitelikler](02_elements_attributes.qmd)
+Graf içindeki verileri listeleme (`nodes`, `edges`), düğümlere ve kenarlara özel nitelikler (örneğin kenar ağırlıkları) ekleme.
+
+---
+
+### [3. Bölüm: Graf Türleri (Yönlü & Çoklu)](03_graph_types.qmd)
+Yönsüz graflar, yönlü graflar (`DiGraph`), çoklu kenar barındıran yapılar (`MultiGraph`) ve bunlar arasındaki farklar.
+
+---
+
+### [4. Bölüm: Graf Üreteçleri & Algoritmalar](04_generators_algorithms.qmd)
+Klasik graf yapıları (Complete, Path) ve sentetik rastgele ağ modelleri. En Kısa Yol (Dijkstra) ve Merkezilik (Centrality) analizleri.
+
+---
+
+### [5. Bölüm: Görselleştirme & İnteraktif Analiz](05_visualization.qmd)
+Grafları çizdirme teknikleri, konumlandırma algoritmaları (layouts) ve tarayıcıda düğümleri sürüklenebilir dinamik **Pyvis** ağları.
+
+---
+
+## Gerekli Kütüphaneler
+
+```bash
+# Gerekli Python kütüphanelerinin kurulumu
+pip install networkx matplotlib pyvis pandas ipykernel scipy
+```
+
+---

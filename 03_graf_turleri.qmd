@@ -1,0 +1,123 @@
+---
+title: "Graf Türleri"
+subtitle: "Yönsüz, Yönlü ve Çoklu Kenarlı Ağ Yapıları"
+jupyter: python3
+---
+
+Ağ analizinde farklı problem türlerini çözmek için farklı bağlantı tiplerine ihtiyaç duyarız. Örneğin, Facebook'ta arkadaşlık **yönsüz** bir ilişkiyken, Instagram'da takip etme **yönlü** bir ilişkidir. Benzer şekilde, iki şehir arasında birden fazla uçuş rotası varsa bu durum **çoklu kenarlar** (multigraph) gerektirir.
+
+NetworkX bu modeller için dört temel graf sınıfı sunar.
+
+------------------------------------------------------------------------
+
+## NetworkX'teki 4 Temel Graf Sınıfı
+
+| Graf Sınıfı | Yönlü mü? | Çoklu Kenar İzin Verir mi? | Kendi Kendine Bağlantı (Self-loop) |
+|:----------------|:----------------:|:----------------:|:----------------:|
+| **`nx.Graph`** | Hayır | Hayır | Evet |
+| **`nx.DiGraph`** | Evet | Hayır | Evet |
+| **`nx.MultiGraph`** | Hayır | Evet | Evet |
+| **`nx.MultiDiGraph`** | Evet | Evet | Evet |
+
+------------------------------------------------------------------------
+
+## 1. Yönsüz Graflar (`nx.Graph`)
+
+Daha önceki bölümlerde kullandığımız varsayılan sınıftır. İlişkiler simetriktir. Yani `(A, B)` arasındaki bağlantı, aynı zamanda `(B, A)` bağlantısı demektir.
+
+```{python}
+import networkx as nx
+
+G = nx.Graph()
+G.add_edge('A', 'B')
+print("Yönsüz Graf Kenarları:", G.edges())
+```
+
+------------------------------------------------------------------------
+
+## 2. Yönlü Graflar (`nx.DiGraph`)
+
+Asimetrik ilişkileri modellemek için kullanılır. Bağlantılar bir kaynaktan bir hedefe doğrudur (Instagram'da takip etme gibi).
+
+```{python}
+# Yönlü graf oluşturma
+DG = nx.DiGraph()
+DG.add_edge('A', 'B') # A'dan B'ye yönlü bir ok
+
+# Kontrol edelim
+print("Bağlantı var mı (A -> B):", DG.has_edge('A', 'B'))
+print("Bağlantı var mı (B -> A):", DG.has_edge('B', 'A'))
+```
+
+### Yönlü Graflarda Özel Metotlar
+
+Yönlü graflarda düğümlerin giriş ve çıkış dereceleri ile öncülleri ve ardılları ayrı ayrı incelenir.
+
+```{python}
+DG.add_edges_from([('A', 'C'), ('B', 'C'), ('C', 'D')])
+
+# 1. Giriş ve Çıkış Dereceleri (In-Degree & Out-Degree)
+# C düğümüne gelen ok sayısı (In-Degree): 2 (A ve B'den)
+# C düğümünden giden ok sayısı (Out-Degree): 1 (D'ye)
+print("C Düğümünün Giriş Derecesi:", DG.in_degree('C'))
+print("C Düğümünün Çıkış Derecesi:", DG.out_degree('C'))
+
+# 2. Öncüller ve Ardıllar
+print("C'ye bağlanan düğümler (Öncüller):", list(DG.predecessors('C')))
+print("C'den bağlanan düğümler (Ardıllar):", list(DG.successors('C')))
+```
+
+------------------------------------------------------------------------
+
+## 3. Çoklu Kenarlı Graflar (`nx.MultiGraph` & `nx.MultiDiGraph`)
+
+İki düğüm arasında birden fazla farklı ilişki veya paralel hat tanımlamak istendiğinde kullanılır (İki havaalanı arasındaki farklı havayolu uçuşlarını modellemek gibi).
+
+```{python}
+# Çoklu kenarlı yönsüz graf
+MG = nx.MultiGraph()
+
+# Aynı düğümler arasına farklı anahtarlarla birden fazla kenar ekleyelim
+MG.add_edge('A', 'B', key='uçak', weight=500)
+MG.add_edge('A', 'B', key='tren', weight=120)
+
+print("Çoklu Yönsüz Kenarlar:", list(MG.edges.data()))
+```
+
+------------------------------------------------------------------------
+
+## Graf Türleri Arasında Dönüşüm
+
+### Yönlü Grafı Yönsüze Dönüştürme (`to_undirected()`)
+
+Dönüşüm esnasında yön okları kalkar. Eğer çift yönlü bağlantı varsa (`A -> B` ve `B -> A`), bunlar yönsüz tek bir kenarda (`A - B`) birleştirilir.
+
+```{python}
+# Yönlü graf oluşturma
+directed_graph = nx.DiGraph()
+directed_graph.add_edges_from([('A', 'B'), ('B', 'A'), ('B', 'C')])
+
+# Yönsüze dönüştürme
+undirected = directed_graph.to_undirected()
+
+print("Orijinal Yönlü Kenarlar:", directed_graph.edges())
+print("Yönsüz Yeni Kenarlar:", undirected.edges())
+```
+
+### Yönsüz Grafı Yönlüye Dönüştürme (`to_directed()`)
+
+Her bir yönsüz kenar (`A - B`), iki adet yönlü kenara (`A -> B` ve `B -> A`) dönüştürülür.
+
+```{python}
+# Yönsüz graf
+undirected_graph = nx.Graph()
+undirected_graph.add_edge('A', 'B')
+
+# Yönlüye dönüştürme
+directed = undirected_graph.to_directed()
+
+print("Orijinal Yönsüz Kenar:", undirected_graph.edges())
+print("Yönlü Yeni Kenarlar:", directed.edges())
+```
+
+---

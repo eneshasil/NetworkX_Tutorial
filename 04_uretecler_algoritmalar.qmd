@@ -1,0 +1,134 @@
+---
+title: "Graf Üreteçleri & Algoritmalar"
+subtitle: "Sentetik Ağlar Yaratma ve Graf Teorisi Algoritmaları"
+jupyter: python3
+---
+
+Ağ analizinde her zaman verileri elle girmek zorunda değiliz. NetworkX, hem teorik çalışmaları simüle etmek için hazır **sentetik ağ üreteçleri** sunar hem de ağ yapısının matematiksel özelliklerini analiz etmek için gelişmiş **algoritmalar** barındırır.
+
+------------------------------------------------------------------------
+
+## Graf Üreteçleri
+
+### 1. Klasik Graf Yapıları
+
+En sık karşılaşılan temel grafları hızlıca oluşturabiliriz:
+
+```{python}
+import networkx as nx
+
+# Tam (Complete) Graf: Her düğümün diğer tüm düğümlere bağlı olduğu graf
+K_5 = nx.complete_graph(5)
+print("Tam Graf (5 Düğümlü) Kenar Sayısı:", K_5.number_of_edges()) # N*(N-1)/2 = 10
+
+# Yol (Path) Graf: Düğümlerin ardışık olarak zincir şeklinde bağlı olduğu graf
+P_10 = nx.path_graph(10)
+print("Yol Grafı (10 Düğümlü) Kenar Sayısı:", P_10.number_of_edges()) # N-1 = 9
+
+# Halka (Cycle) Graf: Yol grafının uçlarının birleştiği kapalı yapı
+C_6 = nx.cycle_graph(6)
+print("Halka Grafı (6 Düğümlü) Kenar Sayısı:", C_6.number_of_edges()) # N = 6
+```
+
+### 2. Rastgele Ağ Modelleri
+
+Ağ bilimi araştırmalarında sıklıkla kullanılan iki ünlü rastgele graf üretecine göz atalım:
+
+:::: concept-card
+::: concept-title
+Erdős-Rényi Graf Modeli
+:::
+
+$G(n, p)$ modelinde $n$ adet düğüm oluşturulur ve her düğüm çifti arasına $p$ olasılığıyla rastgele bir kenar yerleştirilir.
+::::
+
+```{python}
+# 50 düğümlü, düğümler arası bağlantı olasılığı %10 (0.1) olan rastgele graf
+ER = nx.erdos_renyi_graph(50, 0.1)
+print(f"Erdős-Rényi - Düğümler: {ER.number_of_nodes()}, Kenarlar: {ER.number_of_edges()}")
+```
+
+:::: concept-card
+::: concept-title
+Barabási-Albert Graf Modeli
+:::
+
+Gerçek hayattaki ağların birçoğu (İnternet, sosyal ağlar, makale alıntıları) "Zengin daha da zenginleşir" kuralına göre büyür. Barabási-Albert (BA) modeli, derecesi yüksek düğümlerin yeni bağlantılar çekme olasılığının daha yüksek olduğu gerçekçi ağları simüle eder.
+::::
+
+```{python}
+# 100 düğümlü, her yeni eklenen düğümün mevcut ağa 2 yeni kenar ile bağlandığı BA grafı
+BA = nx.barabasi_albert_graph(100, 2)
+print(f"Barabási-Albert - Düğümler: {BA.number_of_nodes()}, Kenarlar: {BA.number_of_edges()}")
+```
+
+------------------------------------------------------------------------
+
+## Ağ Analiz Algoritmaları
+
+NetworkX'in en büyük gücü barındırdığı yüzlerce algoritmadır. Burada ders notu kapsamında en popüler algoritmaları pratik bir şehir haritası ağı üzerinden inceleyelim.
+
+Aşağıdaki gibi bir şehir ulaşım grafı tanımlayalım:
+
+```{python}
+# Şehirler arası mesafeler (Ağırlıklar)
+road_net = nx.Graph()
+road_net.add_edge('İstanbul', 'Ankara', weight=450)
+road_net.add_edge('İstanbul', 'İzmir', weight=480)
+road_net.add_edge('Ankara', 'İzmir', weight=580)
+road_net.add_edge('Ankara', 'Adana', weight=490)
+road_net.add_edge('İzmir', 'Antalya', weight=350)
+road_net.add_edge('Antalya', 'Adana', weight=320)
+```
+
+### 1. En Kısa Yol Analizi (Shortest Path - Dijkstra)
+
+Dijkstra algoritmasını kullanarak İstanbul'dan Adana'ya giden en kısa mesafeli rotayı yol ağırlıklarını hesaba katarak bulalım:
+
+```{python}
+# En kısa rotayı bulma 
+shortest_route = nx.dijkstra_path(road_net, source='İstanbul', target='Adana', weight='weight')
+shortest_length = nx.dijkstra_path_length(road_net, source='İstanbul', target='Adana', weight='weight')
+
+print("İstanbul -> Adana En Kısa Rota:", shortest_route)
+print("Toplam Yol Mesafesi (km):", shortest_length)
+```
+
+### 2. Merkezilik Analizleri (Centrality Measures)
+
+Ağ biliminde hangi düğümün (şehrin) ağın yapısı içinde en kritik, en stratejik veya en merkezi noktada olduğunu belirlemek için kullanılır.
+
+#### A) Derece Merkeziliği
+
+Bir düğümün sahip olduğu komşu sayısına oranını hesaplar. En çok bağlantısı olan şehir en merkezidir.
+
+```{python}
+deg_centrality = nx.degree_centrality(road_net)
+print("Derece Merkezilikleri:")
+for sehir, score in deg_centrality.items():
+    print(f" - {sehir}: {score:.2f}")
+```
+
+#### B) Arasındalık Merkeziliği
+
+Ağdaki tüm en kısa yolların ne kadarının ilgili düğümün üzerinden geçtiğini ölçer. Bir nevi köprü veya transit geçiş noktası görevini üstlenen düğümleri bulur.
+
+```{python}
+bet_centrality = nx.betweenness_centrality(road_net, weight='weight')
+print("Arasındalık Merkezilikleri (Köprü Şehirler):")
+for sehir, score in bet_centrality.items():
+    print(f" - {sehir}: {score:.2f}")
+```
+
+#### C) PageRank Merkeziliği
+
+Google'ın web sayfalarını sıralamak için geliştirdiği ünlü algoritmadır. Bir düğümün kalitesi ve önemi, ona bağlanan diğer düğümlerin önemi ile ölçülür.
+
+```{python}
+pagerank_scores = nx.pagerank(road_net, weight='weight')
+print("PageRank Skorları:")
+for sehir, score in pagerank_scores.items():
+    print(f" - {sehir}: {score:.2f}")
+```
+
+---

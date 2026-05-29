@@ -1,0 +1,105 @@
+project:
+  type: website
+  render:
+    - index.qmd
+    - 01_concepts.qmd
+    - 02_elemanlar_oznitelikler.qmd
+    - 03_graf_turleri.qmd
+    - 04_uretecler_algoritmalar.qmd
+    - 05_gorsellestirmeler.qmd
+
+lang: tr
+
+jupyter: python3
+
+website:
+  title: "NetworkX Ders Notları"
+  description: "IST5128 - Python ile NetworkX Kütüphanesi ve Ağ Analizi Ders Notları"
+  navbar:
+    background: dark
+    pinned: true
+    left:
+      - href: index.qmd
+        text: Ana Sayfa
+  sidebar:
+    style: "docked"
+    search: true
+    collapse-level: 1
+    contents:
+      - href: index.qmd
+        text: "Başlangıç"
+      - section: "Ders İçeriği"
+        contents:
+          - href: 01_tarihce_temelkavramlar.qmd
+            text: "1. Tarihçe & Temel Kavramlar"
+          - href: 02_elemanlar_oznitelikler.qmd
+            text: "2. Eleman İnceleme & Öznitelikler"
+          - href: 03_graf_turleri.qmd
+            text: "3. Graf Türleri (Yönlü, Çoklu)"
+          - href: 04_uretecler_algoritmalar.qmd
+            text: "4. Graf Üreteçleri & Algoritmalar"
+          - href: 05_gorsellestirmeler.qmd
+            text: "5. Görselleştirme & İnteraktif Analiz"
+
+format:
+  html:
+    theme:
+      - cosmo
+      - brand
+    css: styles.css
+    toc: true
+    toc-depth: 3
+    code-fold: show
+    code-summary: "Kodu Göster"
+    code-copy: true
+    code-tools: false
+    highlight-style: github
+    anchor-sections: true
+    include-after-body:
+      text: |
+        <script>
+          document.addEventListener("DOMContentLoaded", function() {
+            const cells = document.querySelectorAll(".cell");
+            cells.forEach(function(cell) {
+              const codeBlock = cell.querySelector(".sourceCode") || cell.querySelector(".code-fold");
+              const output = cell.querySelector(".cell-output");
+              if (codeBlock && output) {
+                output.style.display = "none";
+                output.style.opacity = "0";
+                output.style.transition = "opacity 0.3s ease, max-height 0.3s ease";
+                output.style.maxHeight = "0px";
+                output.style.overflow = "hidden";
+                
+                const btn = document.createElement("button");
+                btn.className = "run-code-btn";
+                btn.innerHTML = "▶ Çıktıyı Gör";
+                
+                codeBlock.parentNode.insertBefore(btn, codeBlock.nextSibling);
+                
+                btn.addEventListener("click", function() {
+                  if (output.style.display === "none") {
+                    btn.innerHTML = "▼ Çıktıyı Gizle";
+                    btn.classList.add("success");
+                    
+                    output.style.display = "block";
+                    setTimeout(function() {
+                      output.style.opacity = "1";
+                      output.style.maxHeight = "1500px";
+                    }, 50);
+                  } else {
+                    output.style.opacity = "0";
+                    output.style.maxHeight = "0px";
+                    setTimeout(function() {
+                      output.style.display = "none";
+                      btn.innerHTML = "▶ Çıktıyı Gör";
+                      btn.classList.remove("success");
+                    }, 200);
+                  }
+                });
+              }
+            });
+          });
+        </script>
+
+editor: visual
+
