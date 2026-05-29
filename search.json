@@ -1,0 +1,310 @@
+[
+  {
+    "objectID": "05_gorsellestirmeler.html",
+    "href": "05_gorsellestirmeler.html",
+    "title": "Matplotlib ve Pyvis ile Görselleştirme",
+    "section": "",
+    "text": "Ağ analizinde verileri görselleştirmek, sayısal analizlerden göremeyeceğimiz yapısal örüntüleri (örneğin gruplaşmaları, merkezleri) tek bakışta anlamamızı sağlar.\nBu bölümde iki farklı yöntemi inceleyeceğiz:",
+    "crumbs": [
+      "Ana Sayfa",
+      "Ders İçeriği",
+      "5. Görselleştirme & İnteraktif Analiz"
+    ]
+  },
+  {
+    "objectID": "05_gorsellestirmeler.html#matplotlib-ile-statik-görselleştirme",
+    "href": "05_gorsellestirmeler.html#matplotlib-ile-statik-görselleştirme",
+    "title": "Matplotlib ve Pyvis ile Görselleştirme",
+    "section": "1. Matplotlib ile Statik Görselleştirme",
+    "text": "1. Matplotlib ile Statik Görselleştirme\nNetworkX, graf çizimleri için arka planda Python’ın popüler grafik kütüphanesi Matplotlib’i kullanır.\nİlk olarak 15 düğümlü bir tekerlek (Wheel) grafı oluşturalım. Tekerlek grafında merkezde bir “hub” düğüm bulunur ve bu düğüm çemberdeki diğer tüm düğümlere bağlıdır. Bu yapı, konumlandırma algoritmalarının farklarını görmek için harika bir örnektir:\n\n\nKodu Göster\nimport networkx as nx\nimport matplotlib.pyplot as plt\n\n# Graf oluştur\nG = nx.wheel_graph(15)\n\n\n\nKonumlandırma Algoritmaları\nNetworkX, düğümleri ekrana nasıl yerleştireceğini belirleyen çeşitli konumlandırma algoritmaları barındırır. pos değişkeni düğümlerin 2 boyutlu koordinat sözlüğünü tutar.\n\nKodu Göster\n# Düğümleri esnek yaylar gibi konumlandırır (varsayılan)\npos_spring = nx.spring_layout(G, seed=42)\nnx.draw(G, pos=pos_spring, with_labels=True, node_color='#14B8A6', edge_color='gray')\n# Düğümleri düzgün bir daire üzerine dizer\npos_circular = nx.circular_layout(G)\nnx.draw(G, pos=pos_circular, with_labels=True, node_color='#10B981', edge_color='gray')\n\n\n\n\n\n\n\n\n\n\n\nŞekil 1: Spring (Yaylı/Fiziksel) Konumlandırma\n\n\n\n\n\n\n\n\n\n\n\n\n\nŞekil 2: Dairesel (Circular) Konumlandırma\n\n\n\n\n\n\n\n\n\nGelişmiş Özelleştirme\nDüğümlerin boyutunu derecelerine göre, renklerini de özniteliklerine göre özelleştirerek daha anlamlı graflar elde edebiliriz:\n\n\nKodu Göster\n# Bir yıldız grafı oluşturalım\nstar = nx.star_graph(8)\n\n# Merkez düğüm 0'dır, komşuları 1-8. Derecelerini hesaplayalım\ndegrees = [star.degree(node) for node in star.nodes()]\n\n# Derecelere göre boyut belirleyelim (derece ne kadar büyükse düğüm o kadar büyük olsun)\nnode_sizes = [d * 300 for d in degrees]\n\n# Derecesi en yüksek olanı kırmızı, diğerlerini mavi yapalım\nnode_colors = ['#EF4444' if d == max(degrees) else '#3B82F6' for d in degrees]\n\n# Çizdirelim\nplt.figure(figsize=(8, 6))\nnx.draw(star, \n        with_labels=True, \n        node_size=node_sizes, \n        node_color=node_colors, \n        edge_color='#94A3B8', \n        font_color='white',\n        font_weight='bold')\nplt.title(\"Derece Boyutlandırmalı Yıldız Grafı\")\nplt.show()",
+    "crumbs": [
+      "Ana Sayfa",
+      "Ders İçeriği",
+      "5. Görselleştirme & İnteraktif Analiz"
+    ]
+  },
+  {
+    "objectID": "05_gorsellestirmeler.html#pyvis-ile-interaktif-ağ-görselleştirme",
+    "href": "05_gorsellestirmeler.html#pyvis-ile-interaktif-ağ-görselleştirme",
+    "title": "Matplotlib ve Pyvis ile Görselleştirme",
+    "section": "2. Pyvis ile İnteraktif Ağ Görselleştirme",
+    "text": "2. Pyvis ile İnteraktif Ağ Görselleştirme\nMatplotlib harika statik görüntüler sunar ancak ağ büyüdükçe (örneğin 50+ düğüm) düğümler üst üste biner ve detayları okumak imkansızlaşır.\nPyvis, tarayıcıda çalışan, etkileşimli, animasyonlu ve tamamen fizik simülasyonu destekleyen ağlar oluşturmamızı sağlar.\n\n\nKodu Göster\nfrom pyvis.network import Network\nimport networkx as nx\n\n# 30 düğümlü bir BA grafı oluşturalım\nBA = nx.barabasi_albert_graph(30, 1)\n\n# Pyvis Ağı tanımlayalım \nnet = Network(height='500px', width='100%', bgcolor='#0F172A', font_color='white')\n\n# NetworkX grafını Pyvis nesnesine aktaralım ve özniteliklerini optimize edelim\nfor node in BA.nodes():\n    deg = BA.degree(node)\n    # Düğüm boyutunu derecesine göre ayarlıyoruz\n    size = deg * 5 + 5\n    # Düğümün üzerine fare ile gelince (hover) derece bilgisini gösterelim\n    title = f\"Düğüm {node} - Derece: {deg}\"\n    # Düğüm rengini derecesine göre koyu yeşilden açık teal rengine ayarlayalım\n    color = '#14B8A6' if deg &gt; 1 else '#10B981'\n    \n    net.add_node(node, label=str(node), size=size, title=title, color=color)\n\n# Kenarları ekleyelim\nfor edge in BA.edges():\n    net.add_edge(edge[0], edge[1], color='#475569')\n\n# Fiziksel dinamikleri aktif edelim \nnet.barnes_hut()\n\n# Etkileşimli HTML sayfasını oluşturalım\nnet.write_html('pyvis_graph.html')\n\n\n\nCanlı İnteraktif Simülasyon\nYukarıdaki kod tarafından derlenen, düğümlerini sürükleyip bırakabileceğiniz canlı etkileşimli graf aşağıdadır:",
+    "crumbs": [
+      "Ana Sayfa",
+      "Ders İçeriği",
+      "5. Görselleştirme & İnteraktif Analiz"
+    ]
+  },
+  {
+    "objectID": "03_graf_turleri.html",
+    "href": "03_graf_turleri.html",
+    "title": "Graf Türleri",
+    "section": "",
+    "text": "Ağ analizinde farklı problem türlerini çözmek için farklı bağlantı tiplerine ihtiyaç duyarız. Örneğin, Facebook’ta arkadaşlık yönsüz bir ilişkiyken, Instagram’da takip etme yönlü bir ilişkidir. Benzer şekilde, iki şehir arasında birden fazla uçuş rotası varsa bu durum çoklu kenarlar (multigraph) gerektirir.\nNetworkX bu modeller için dört temel graf sınıfı sunar.",
+    "crumbs": [
+      "Ana Sayfa",
+      "Ders İçeriği",
+      "3. Graf Türleri (Yönlü, Çoklu)"
+    ]
+  },
+  {
+    "objectID": "03_graf_turleri.html#networkxteki-4-temel-graf-sınıfı",
+    "href": "03_graf_turleri.html#networkxteki-4-temel-graf-sınıfı",
+    "title": "Graf Türleri",
+    "section": "NetworkX’teki 4 Temel Graf Sınıfı",
+    "text": "NetworkX’teki 4 Temel Graf Sınıfı\n\n\n\n\n\n\n\n\n\nGraf Sınıfı\nYönlü mü?\nÇoklu Kenar İzin Verir mi?\nKendi Kendine Bağlantı (Self-loop)\n\n\n\n\nnx.Graph\nHayır\nHayır\nEvet\n\n\nnx.DiGraph\nEvet\nHayır\nEvet\n\n\nnx.MultiGraph\nHayır\nEvet\nEvet\n\n\nnx.MultiDiGraph\nEvet\nEvet\nEvet",
+    "crumbs": [
+      "Ana Sayfa",
+      "Ders İçeriği",
+      "3. Graf Türleri (Yönlü, Çoklu)"
+    ]
+  },
+  {
+    "objectID": "03_graf_turleri.html#yönsüz-graflar-nx.graph",
+    "href": "03_graf_turleri.html#yönsüz-graflar-nx.graph",
+    "title": "Graf Türleri",
+    "section": "1. Yönsüz Graflar (nx.Graph)",
+    "text": "1. Yönsüz Graflar (nx.Graph)\nDaha önceki bölümlerde kullandığımız varsayılan sınıftır. İlişkiler simetriktir. Yani (A, B) arasındaki bağlantı, aynı zamanda (B, A) bağlantısı demektir.\n\n\nKodu Göster\nimport networkx as nx\n\nG = nx.Graph()\nG.add_edge('A', 'B')\nprint(\"Yönsüz Graf Kenarları:\", G.edges())\n\n\nYönsüz Graf Kenarları: [('A', 'B')]",
+    "crumbs": [
+      "Ana Sayfa",
+      "Ders İçeriği",
+      "3. Graf Türleri (Yönlü, Çoklu)"
+    ]
+  },
+  {
+    "objectID": "03_graf_turleri.html#yönlü-graflar-nx.digraph",
+    "href": "03_graf_turleri.html#yönlü-graflar-nx.digraph",
+    "title": "Graf Türleri",
+    "section": "2. Yönlü Graflar (nx.DiGraph)",
+    "text": "2. Yönlü Graflar (nx.DiGraph)\nAsimetrik ilişkileri modellemek için kullanılır. Bağlantılar bir kaynaktan bir hedefe doğrudur (Instagram’da takip etme gibi).\n\n\nKodu Göster\n# Yönlü graf oluşturma\nDG = nx.DiGraph()\nDG.add_edge('A', 'B') # A'dan B'ye yönlü bir ok\n\n# Kontrol edelim\nprint(\"Bağlantı var mı (A -&gt; B):\", DG.has_edge('A', 'B'))\nprint(\"Bağlantı var mı (B -&gt; A):\", DG.has_edge('B', 'A'))\n\n\nBağlantı var mı (A -&gt; B): True\nBağlantı var mı (B -&gt; A): False\n\n\n\nYönlü Graflarda Özel Metotlar\nYönlü graflarda düğümlerin giriş ve çıkış dereceleri ile öncülleri ve ardılları ayrı ayrı incelenir.\n\n\nKodu Göster\nDG.add_edges_from([('A', 'C'), ('B', 'C'), ('C', 'D')])\n\n# 1. Giriş ve Çıkış Dereceleri (In-Degree & Out-Degree)\n# C düğümüne gelen ok sayısı (In-Degree): 2 (A ve B'den)\n# C düğümünden giden ok sayısı (Out-Degree): 1 (D'ye)\nprint(\"C Düğümünün Giriş Derecesi:\", DG.in_degree('C'))\nprint(\"C Düğümünün Çıkış Derecesi:\", DG.out_degree('C'))\n\n# 2. Öncüller ve Ardıllar\nprint(\"C'ye bağlanan düğümler (Öncüller):\", list(DG.predecessors('C')))\nprint(\"C'den bağlanan düğümler (Ardıllar):\", list(DG.successors('C')))\n\n\nC Düğümünün Giriş Derecesi: 2\nC Düğümünün Çıkış Derecesi: 1\nC'ye bağlanan düğümler (Öncüller): ['A', 'B']\nC'den bağlanan düğümler (Ardıllar): ['D']",
+    "crumbs": [
+      "Ana Sayfa",
+      "Ders İçeriği",
+      "3. Graf Türleri (Yönlü, Çoklu)"
+    ]
+  },
+  {
+    "objectID": "03_graf_turleri.html#çoklu-kenarlı-graflar-nx.multigraph-nx.multidigraph",
+    "href": "03_graf_turleri.html#çoklu-kenarlı-graflar-nx.multigraph-nx.multidigraph",
+    "title": "Graf Türleri",
+    "section": "3. Çoklu Kenarlı Graflar (nx.MultiGraph & nx.MultiDiGraph)",
+    "text": "3. Çoklu Kenarlı Graflar (nx.MultiGraph & nx.MultiDiGraph)\nİki düğüm arasında birden fazla farklı ilişki veya paralel hat tanımlamak istendiğinde kullanılır (İki havaalanı arasındaki farklı havayolu uçuşlarını modellemek gibi).\n\n\nKodu Göster\n# Çoklu kenarlı yönsüz graf\nMG = nx.MultiGraph()\n\n# Aynı düğümler arasına farklı anahtarlarla birden fazla kenar ekleyelim\nMG.add_edge('A', 'B', key='uçak', weight=500)\nMG.add_edge('A', 'B', key='tren', weight=120)\n\nprint(\"Çoklu Yönsüz Kenarlar:\", list(MG.edges.data()))\n\n\nÇoklu Yönsüz Kenarlar: [('A', 'B', {'weight': 500}), ('A', 'B', {'weight': 120})]",
+    "crumbs": [
+      "Ana Sayfa",
+      "Ders İçeriği",
+      "3. Graf Türleri (Yönlü, Çoklu)"
+    ]
+  },
+  {
+    "objectID": "03_graf_turleri.html#graf-türleri-arasında-dönüşüm",
+    "href": "03_graf_turleri.html#graf-türleri-arasında-dönüşüm",
+    "title": "Graf Türleri",
+    "section": "Graf Türleri Arasında Dönüşüm",
+    "text": "Graf Türleri Arasında Dönüşüm\n\nYönlü Grafı Yönsüze Dönüştürme (to_undirected())\nDönüşüm esnasında yön okları kalkar. Eğer çift yönlü bağlantı varsa (A -&gt; B ve B -&gt; A), bunlar yönsüz tek bir kenarda (A - B) birleştirilir.\n\n\nKodu Göster\n# Yönlü graf oluşturma\ndirected_graph = nx.DiGraph()\ndirected_graph.add_edges_from([('A', 'B'), ('B', 'A'), ('B', 'C')])\n\n# Yönsüze dönüştürme\nundirected = directed_graph.to_undirected()\n\nprint(\"Orijinal Yönlü Kenarlar:\", directed_graph.edges())\nprint(\"Yönsüz Yeni Kenarlar:\", undirected.edges())\n\n\nOrijinal Yönlü Kenarlar: [('A', 'B'), ('B', 'A'), ('B', 'C')]\nYönsüz Yeni Kenarlar: [('A', 'B'), ('B', 'C')]\n\n\n\n\nYönsüz Grafı Yönlüye Dönüştürme (to_directed())\nHer bir yönsüz kenar (A - B), iki adet yönlü kenara (A -&gt; B ve B -&gt; A) dönüştürülür.\n\n\nKodu Göster\n# Yönsüz graf\nundirected_graph = nx.Graph()\nundirected_graph.add_edge('A', 'B')\n\n# Yönlüye dönüştürme\ndirected = undirected_graph.to_directed()\n\nprint(\"Orijinal Yönsüz Kenar:\", undirected_graph.edges())\nprint(\"Yönlü Yeni Kenarlar:\", directed.edges())\n\n\nOrijinal Yönsüz Kenar: [('A', 'B')]\nYönlü Yeni Kenarlar: [('A', 'B'), ('B', 'A')]",
+    "crumbs": [
+      "Ana Sayfa",
+      "Ders İçeriği",
+      "3. Graf Türleri (Yönlü, Çoklu)"
+    ]
+  },
+  {
+    "objectID": "01_tarihce_temelkavramlar.html",
+    "href": "01_tarihce_temelkavramlar.html",
+    "title": "Tarihçe & Temel Kavramlar",
+    "section": "",
+    "text": "Graf teorisi, 18. yüzyılda İsviçreli ünlü matematikçi Leonhard Euler’in çözdüğü meşhur bir bulmaca ile doğmuştur: Königsberg’in Yedi Köprüsü (Seven Bridges of Königsberg) problemi.\nKönigsberg şehri (günümüzde Rusya’ya bağlı Kaliningrad), Pregel Nehri’nin her iki yakasını ve nehir üzerindeki iki büyük adayı birbirine bağlayan yedi köprüye sahipti. Şehir sakinleri şu sorunun cevabını merak ediyordu:\n\n“Şehirdeki herhangi bir noktadan başlayıp, yedi köprünün her birinden tam olarak bir kez geçerek tüm şehri dolaşmak ve başlanılan noktaya geri dönmek mümkün müdür?”\n\nEuler, 1736 yılında bu problemin imkansız olduğunu matematiksel olarak kanıtladı. Problemi çözerken, karaları düğümlere (nodes / vertices), köprüleri ise bu karaları birbirine bağlayan kenarlara (edges / links) dönüştürdü. Böylece tarihteki ilk grafı (ağı) modelledi.\nEuler, bir düğümden geçip gitmek için o düğüme bir kenardan girip diğer kenardan çıkılması gerektiğini fark etti. Dolayısıyla, başlangıç ve bitiş düğümleri hariç, tüm düğümlerin bağlı olduğu kenar sayısının (yani düğüm derecelerinin - degree) çift sayı olması gerekiyordu. Königsberg’deki karaların (düğümlerin) kenar sayıları incelendiğinde sırasıyla 3, 3, 3 ve 5 olduğu (hepsinin tek sayı olduğu) görüldü. Bu durum, böyle bir yürüyüşün (Euler Yolu / Euler Path) imkansız olduğunu gösteriyordu.\nBu problem ve Euler’in sunduğu çözüm yöntemi, modern Graf Teorisi (Graph Theory) ve Topoloji bilim dallarının resmi başlangıcı olarak kabul edilir.\n :::",
+    "crumbs": [
+      "Ana Sayfa",
+      "Ders İçeriği",
+      "1. Tarihçe & Temel Kavramlar"
+    ]
+  },
+  {
+    "objectID": "01_tarihce_temelkavramlar.html#graf-teorisinin-tarihçesi-königsbergin-yedi-köprüsü",
+    "href": "01_tarihce_temelkavramlar.html#graf-teorisinin-tarihçesi-königsbergin-yedi-köprüsü",
+    "title": "Tarihçe & Temel Kavramlar",
+    "section": "",
+    "text": "Graf teorisi, 18. yüzyılda İsviçreli ünlü matematikçi Leonhard Euler’in çözdüğü meşhur bir bulmaca ile doğmuştur: Königsberg’in Yedi Köprüsü (Seven Bridges of Königsberg) problemi.\nKönigsberg şehri (günümüzde Rusya’ya bağlı Kaliningrad), Pregel Nehri’nin her iki yakasını ve nehir üzerindeki iki büyük adayı birbirine bağlayan yedi köprüye sahipti. Şehir sakinleri şu sorunun cevabını merak ediyordu:\n\n“Şehirdeki herhangi bir noktadan başlayıp, yedi köprünün her birinden tam olarak bir kez geçerek tüm şehri dolaşmak ve başlanılan noktaya geri dönmek mümkün müdür?”\n\nEuler, 1736 yılında bu problemin imkansız olduğunu matematiksel olarak kanıtladı. Problemi çözerken, karaları düğümlere (nodes / vertices), köprüleri ise bu karaları birbirine bağlayan kenarlara (edges / links) dönüştürdü. Böylece tarihteki ilk grafı (ağı) modelledi.\nEuler, bir düğümden geçip gitmek için o düğüme bir kenardan girip diğer kenardan çıkılması gerektiğini fark etti. Dolayısıyla, başlangıç ve bitiş düğümleri hariç, tüm düğümlerin bağlı olduğu kenar sayısının (yani düğüm derecelerinin - degree) çift sayı olması gerekiyordu. Königsberg’deki karaların (düğümlerin) kenar sayıları incelendiğinde sırasıyla 3, 3, 3 ve 5 olduğu (hepsinin tek sayı olduğu) görüldü. Bu durum, böyle bir yürüyüşün (Euler Yolu / Euler Path) imkansız olduğunu gösteriyordu.\nBu problem ve Euler’in sunduğu çözüm yöntemi, modern Graf Teorisi (Graph Theory) ve Topoloji bilim dallarının resmi başlangıcı olarak kabul edilir.\n :::",
+    "crumbs": [
+      "Ana Sayfa",
+      "Ders İçeriği",
+      "1. Tarihçe & Temel Kavramlar"
+    ]
+  },
+  {
+    "objectID": "01_tarihce_temelkavramlar.html#graflara-giriş",
+    "href": "01_tarihce_temelkavramlar.html#graflara-giriş",
+    "title": "Tarihçe & Temel Kavramlar",
+    "section": "Graf’lara Giriş",
+    "text": "Graf’lara Giriş\nBir Graf, \\(G=(V,E)\\) şeklinde ifade edilen bir demettir; burada \\(V\\), köşelerden oluşan sonlu bir kümedir ve \\(E\\), \\(V\\)’nin tek veya iki elemanlı alt kümelerinden elemanlar içeren kümelerden oluşan bir koleksiyondur. \\(V\\) düğümler (vertices, nodes) ve \\(E\\) kenarlar (edges) olarak adlandırılır.\n\nNetworkX kütüphanesini kullanarak boş bir yönsüz graf oluşturarak başlayalım.",
+    "crumbs": [
+      "Ana Sayfa",
+      "Ders İçeriği",
+      "1. Tarihçe & Temel Kavramlar"
+    ]
+  },
+  {
+    "objectID": "01_tarihce_temelkavramlar.html#ilk-grafı-oluşturma",
+    "href": "01_tarihce_temelkavramlar.html#ilk-grafı-oluşturma",
+    "title": "Tarihçe & Temel Kavramlar",
+    "section": "İlk Grafı Oluşturma",
+    "text": "İlk Grafı Oluşturma\nİlk olarak NetworkX kütüphanesini içe aktarıyoruz ve boş bir Graph nesnesi oluşturuyoruz:\n\n\nKodu Göster\nimport networkx as nx\n\n# Boş bir yönsüz graf oluşturma\nG = nx.Graph()\n\nprint(type(G))\n\n\n&lt;class 'networkx.classes.graph.Graph'&gt;",
+    "crumbs": [
+      "Ana Sayfa",
+      "Ders İçeriği",
+      "1. Tarihçe & Temel Kavramlar"
+    ]
+  },
+  {
+    "objectID": "01_tarihce_temelkavramlar.html#düğümler",
+    "href": "01_tarihce_temelkavramlar.html#düğümler",
+    "title": "Tarihçe & Temel Kavramlar",
+    "section": "Düğümler",
+    "text": "Düğümler\nOluşturduğumuz G grafına düğümler eklemenin farklı yolları vardır. NetworkX oldukça esnektir; Python’da hashable (yani değiştirilemez ve benzersiz şekilde indekslenebilir) olan neredeyse her nesne bir düğüm olabilir.\n\nNone Nesnesi İstisnası: Python’ın None nesnesi NetworkX’te bir düğüm olarak kullanılamaz. Birçok fonksiyonun isteğe bağlı parametre atamalarında kontrol amaçlı kullanıldığı için kütüphane tarafından düğüm olarak kabul edilmez.\n\n\n1. Tek Bir Düğüm Ekleme\nadd_node() metodunu kullanarak tek bir düğüm ekleyebiliriz:\n\n\nKodu Göster\nG.add_node(1)\n\n\n\n\n2. Liste veya İteratör ile Birden Fazla Düğüm Ekleme\nadd_nodes_from() metoduna bir Python listesi, kümesi veya aralığı (range) göndererek toplu düğüm eklemesi yapabiliriz:\n\n\nKodu Göster\n# Bir liste ile düğüm ekleme\nG.add_nodes_from([2, 3])\n\n# Bir range nesnesi ile düğüm ekleme\nG.add_nodes_from(range(4, 7))\n\n# Mevcut düğümleri görelim\nprint(\"Graftaki Düğümler:\", G.nodes())\n\n\nGraftaki Düğümler: [1, 2, 3, 4, 5, 6]\n\n\n\n\n3. Diğer Graflardan Düğüm Çekme\nBaşka bir grafın düğümlerini de doğrudan grafımıza ekleyebiliriz:\n\n\nKodu Göster\n# 10 düğümlü bir yol grafı (path graph) oluşturalım\nH = nx.path_graph(10)\n\n# H grafının düğümlerini G'ye ekleyelim\nG.add_nodes_from(H)\n\nprint(\"G'nin yeni düğümleri:\", G.nodes())\n\n\nG'nin yeni düğümleri: [1, 2, 3, 4, 5, 6, 0, 7, 8, 9]\n\n\n\nYol Grafı: Düğümlerin ardışık bir şekilde, kenarlarla tek bir hat üzerinde birleşmesiyle oluşan en basit ve temel graf türlerinden biridir.",
+    "crumbs": [
+      "Ana Sayfa",
+      "Ders İçeriği",
+      "1. Tarihçe & Temel Kavramlar"
+    ]
+  },
+  {
+    "objectID": "01_tarihce_temelkavramlar.html#kenarlar",
+    "href": "01_tarihce_temelkavramlar.html#kenarlar",
+    "title": "Tarihçe & Temel Kavramlar",
+    "section": "Kenarlar",
+    "text": "Kenarlar\nKenarlar düğümler arasındaki ilişkileri gösterir. Tıpkı düğümlerde olduğu gibi kenarları da tek tek veya toplu halde ekleyebiliriz.\n\n1. Tek Bir Kenar Ekleme\nadd_edge() metodunu kullanarak iki düğüm arasına bir bağlantı atarız:\n\n\nKodu Göster\nG.add_edge(1, 2)\n\n\n\n\n2. Liste veya İteratör ile Birden Fazla Kenar Ekleme\nadd_edges_from() metodu ile bir tuple listesi göndererek toplu bağlantılar oluşturabiliriz:\n\n\nKodu Göster\nG.add_edges_from([(1, 3), (2, 4), (3, 5)])\n\nprint(\"Graftaki Kenarlar:\", G.edges())\n\n\nGraftaki Kenarlar: [(1, 2), (1, 3), (2, 4), (3, 5)]\n\n\n\n\nOtomatik Düğüm Oluşturma Özelliği\n\n\nNetworkX’te henüz grafa eklenmemiş düğümler arasına bir kenar eklerseniz, kütüphane bu düğümleri otomatik olarak tespit eder ve grafa ekler. Düğümleri önce ayrı olarak eklemenize gerek yoktur.\n\n\nBunu bir örnekle görelim:\n\n\nKodu Göster\n# 99 ve 100 adında düğümlerimiz henüz yok\nprint(\"99 düğümde var mı?:\", 99 in G)\n\n# Ancak doğrudan aralarında kenar tanımlıyoruz\nG.add_edge(99, 100)\n\n# Şimdi kontrol edelim\nprint(\"99 düğümde var mı?:\", 99 in G)\nprint(\"100 düğümde var mı?:\", 100 in G)\nprint(\"Yeni kenarlar:\", G.edges())\n\n\n99 düğümde var mı?: False\n99 düğümde var mı?: True\n100 düğümde var mı?: True\nYeni kenarlar: [(1, 2), (1, 3), (2, 4), (3, 5), (99, 100)]",
+    "crumbs": [
+      "Ana Sayfa",
+      "Ders İçeriği",
+      "1. Tarihçe & Temel Kavramlar"
+    ]
+  },
+  {
+    "objectID": "01_tarihce_temelkavramlar.html#temizleme",
+    "href": "01_tarihce_temelkavramlar.html#temizleme",
+    "title": "Tarihçe & Temel Kavramlar",
+    "section": "Temizleme",
+    "text": "Temizleme\nGrafı tamamen boşaltmak istiyorsak clear() metodunu çağırabiliriz. Bu işlem tüm düğümleri ve kenarları siler:\n\n\nKodu Göster\n# Grafı temizle\nG.clear()\n\nprint(\"Düğümler:\", G.nodes())\nprint(\"Kenarlar:\", G.edges())\n\n\nDüğümler: []\nKenarlar: []",
+    "crumbs": [
+      "Ana Sayfa",
+      "Ders İçeriği",
+      "1. Tarihçe & Temel Kavramlar"
+    ]
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "NetworkX Tutorial",
+    "section": "",
+    "text": "Bu ders notları, Python’da NetworkX kütüphanesini adım adım öğrenmeniz için tasarlanmıştır. Notlar boyunca teorik kavramları, pratik kod bloklarını ve etkileşimli ağ görselleştirmelerini bir arada inceleyeceğiz.",
+    "crumbs": [
+      "Ana Sayfa",
+      "Başlangıç"
+    ]
+  },
+  {
+    "objectID": "index.html#ders-notlarının-içeriği",
+    "href": "index.html#ders-notlarının-içeriği",
+    "title": "NetworkX Tutorial",
+    "section": "Ders Notlarının İçeriği",
+    "text": "Ders Notlarının İçeriği\n\nGraf Teorisinin temel kavramları.\nDüğümler (Nodes), kenarlar (Edges), öznitelikler (attributes).\nYönlü (directed) ve yönsüz (undirected) ağ yapıları.\nTemel ağ algoritmaları (En kısa yol, merkezilik vb.).\nMatplotlib ve tarayıcı içi fizik tabanlı interaktif Pyvis kütüphanesi ile görselleştirmeler.",
+    "crumbs": [
+      "Ana Sayfa",
+      "Başlangıç"
+    ]
+  },
+  {
+    "objectID": "index.html#başlıklar",
+    "href": "index.html#başlıklar",
+    "title": "NetworkX Tutorial",
+    "section": "Başlıklar",
+    "text": "Başlıklar\nAşağıdaki bağlantıları kullanarak sırasıyla ders modüllerine geçiş yapabilirsiniz:\n\n1. Bölüm: Tarihçe & Temel Kavramlar\nGraf Teorisinin tarihçesi, NetworkX graf nesnesi oluşturma, düğüm ve kenar ekleme yöntemleri.\n\n\n\n2. Bölüm: Eleman İnceleme & Öznitelikler\nGraf içindeki verileri listeleme (nodes, edges), düğümlere ve kenarlara özel nitelikler (örneğin kenar ağırlıkları) ekleme.\n\n\n\n3. Bölüm: Graf Türleri (Yönlü & Çoklu)\nYönsüz graflar, yönlü graflar (DiGraph), çoklu kenar barındıran yapılar (MultiGraph) ve bunlar arasındaki farklar.\n\n\n\n4. Bölüm: Graf Üreteçleri & Algoritmalar\nKlasik graf yapıları (Complete, Path) ve sentetik rastgele ağ modelleri. En Kısa Yol (Dijkstra) ve Merkezilik (Centrality) analizleri.\n\n\n\n5. Bölüm: Görselleştirme & İnteraktif Analiz\nGrafları çizdirme teknikleri, konumlandırma algoritmaları (layouts) ve tarayıcıda düğümleri sürüklenebilir dinamik Pyvis ağları.",
+    "crumbs": [
+      "Ana Sayfa",
+      "Başlangıç"
+    ]
+  },
+  {
+    "objectID": "index.html#gerekli-kütüphaneler",
+    "href": "index.html#gerekli-kütüphaneler",
+    "title": "NetworkX Tutorial",
+    "section": "Gerekli Kütüphaneler",
+    "text": "Gerekli Kütüphaneler\n# Gerekli Python kütüphanelerinin kurulumu\npip install networkx matplotlib pyvis pandas ipykernel scipy",
+    "crumbs": [
+      "Ana Sayfa",
+      "Başlangıç"
+    ]
+  },
+  {
+    "objectID": "02_elemanlar_oznitelikler.html",
+    "href": "02_elemanlar_oznitelikler.html",
+    "title": "Eleman İnceleme & Öznitelikler",
+    "section": "",
+    "text": "Bir ağ oluşturduktan sonra, ağın elemanlarını (düğümler, kenarlar, dereceler) sorgulamamız ve bu elemanlara ek özellikler eklememiz gerekir. NetworkX bunun için oldukça güçlü ve esnek araçlar sunar.",
+    "crumbs": [
+      "Ana Sayfa",
+      "Ders İçeriği",
+      "2. Eleman İnceleme & Öznitelikler"
+    ]
+  },
+  {
+    "objectID": "02_elemanlar_oznitelikler.html#grafın-elemanlarını-inceleme",
+    "href": "02_elemanlar_oznitelikler.html#grafın-elemanlarını-inceleme",
+    "title": "Eleman İnceleme & Öznitelikler",
+    "section": "Grafın Elemanlarını İnceleme",
+    "text": "Grafın Elemanlarını İnceleme\nNetworkX, grafın güncel durumunu izlemek için Set-like Views adı verilen veri yapıları kullanır. Bu yapılar salt-okunurdur ve graf güncellendikçe otomatik olarak güncellenirler.\nİlk olarak üzerinde çalışacağımız temel bir graf oluşturalım:\n\n\nKodu Göster\nimport networkx as nx\n\nG = nx.Graph()\nG.add_edges_from([(1, 2), (1, 3), (2, 4), (3, 4)])\n\n\n\n1. Düğümleri ve Kenarları İnceleme\nDüğümleri G.nodes ve kenarları G.edges ile sorgularız:\n\n\nKodu Göster\nprint(\"Düğümler:\", G.nodes)\nprint(\"Kenarlar:\", G.edges)\n\n\nDüğümler: [1, 2, 3, 4]\nKenarlar: [(1, 2), (1, 3), (2, 4), (3, 4)]\n\n\n\n\n2. Komşulukları (Adjacency) Sorgulama\n\nKomşuluk: Graf teoride üç çeşit komşuluk vardır:\n\n\ndüğüm - düğüm komuşuluğu: \\(G=(V,E)\\) bir graf ve \\(v_1,v_2 \\in V\\) olsun. Eğer \\(e=\\{v_1,v_2\\}\\) olacak şekilde \\(e\\in E\\) varsa \\(v_1\\) ve \\(v_2\\) komşu düğümlerdir denir.\nkenar - kenar komşuluğu: \\(G=(V,E)\\) bir graf ve \\(e_1,e_2 \\in E\\) olsun. Eğer \\(v \\in e_1\\) ve \\(v \\in e_2\\) olacak şekilde \\(v \\in V\\) varsa \\(e_1\\) ve \\(e_2\\) komşu kenarlardır denir.\ndüğüm - kenar komşuluğu: \\(G=(V,E)\\) bir graf ve \\(v \\in V\\), \\(e \\in E\\) olsun. Eğer \\(v \\in e\\) ise \\(v\\) ve \\(e\\) komşudur denir.\n\nBir düğümün bağlı olduğu diğer düğümleri (komşularını) görmek için G.adj veya G[düğüm_id] yapısını kullanırız:\n\n\nKodu Göster\n# 1 nolu düğümün komşuları\nprint(\"1 nolu düğümün komşuları:\", G[1])\n\n# 2 nolu düğümün komşuları\nprint(\"2 nolu düğümün komşuları:\", G.adj[2])\n\n\n1 nolu düğümün komşuları: {2: {}, 3: {}}\n2 nolu düğümün komşuları: {1: {}, 4: {}}\n\n\n\n\n3. Dereceleri Sorgulama\n\nBir düğümün derecesi: \\(G=(V,E)\\) bir graf olsun. \\(v\\) düğümünün derecesi \\(v\\)’ye bitişik olan kendinden bağımsız döngü kenarlarının sayısına, \\(v\\)’deki kendine döngü kenarlarının sayısının iki katının eklenmesiyle elde edilir. \\(deg(v)\\) ile gösterilir. \\[deg(v)= |\\{e \\in E : \\exists v \\in V: e = \\{u,v\\}\\}| + 2 * |\\{e \\in E : e=\\{v\\}\\}|\\]\n\n\n\nKodu Göster\n# Tüm düğümlerin dereceleri\nprint(\"Tüm Dereceler:\", G.degree)\n\n# Belirli bir düğümün derecesi\nprint(\"1 nolu düğümün derecesi:\", G.degree[1])\n\n\nTüm Dereceler: [(1, 2), (2, 2), (3, 2), (4, 2)]\n1 nolu düğümün derecesi: 2",
+    "crumbs": [
+      "Ana Sayfa",
+      "Ders İçeriği",
+      "2. Eleman İnceleme & Öznitelikler"
+    ]
+  },
+  {
+    "objectID": "02_elemanlar_oznitelikler.html#öznitelikler",
+    "href": "02_elemanlar_oznitelikler.html#öznitelikler",
+    "title": "Eleman İnceleme & Öznitelikler",
+    "section": "Öznitelikler",
+    "text": "Öznitelikler\nAğları gerçek hayattaki karmaşık sistemleri modellemek için kullandığımızda düğümlerin ve kenarların sadece sayılardan ibaret olmaması gerekir. Örneğin:\n\nDüğüm Öznitelikleri: Bir sosyal ağda düğümlerin “İsim”, “Yaş”, “Ülke” gibi bilgileri olmalıdır.\nKenar Öznitelikleri: Yol ağındaki kenarların “Uzaklık (Ağırlık)”, “Hız Sınırı”, “Yol Türü” gibi bilgileri olmalıdır.\nGraf Öznitelikleri: Tüm ağı tanımlayan “Tarih”, “Ağ İsmi” gibi meta veriler olmalıdır.\n\nNetworkX’te tüm bu bilgiler arka planda Python sözlükleri (dictionary) olarak tutulur.\n\n1. Graf Öznitelikleri\nBir grafın kendisine ait genel bilgileri tanımlamak için kullanılır:\n\n\nKodu Göster\n# Tanımlama esnasında öznitelik ekleme\nnet = nx.Graph(isim=\"Şehir Metro Ağı\", ulke=\"Türkiye\")\nprint(\"Graf Öznitelikleri:\", net.graph)\n\n# Sonradan öznitelik ekleme/güncelleme\nnet.graph['tarih'] = '2026-05-15'\nprint(\"Güncel Öznitelikler:\", net.graph)\n\n\nGraf Öznitelikleri: {'isim': 'Şehir Metro Ağı', 'ulke': 'Türkiye'}\nGüncel Öznitelikler: {'isim': 'Şehir Metro Ağı', 'ulke': 'Türkiye', 'tarih': '2026-05-15'}\n\n\n\n\n2. Düğüm Öznitelikleri\nDüğümlere özel nitelikler eklemenin yolları:\n\n\nKodu Göster\n# Düğümü eklerken nitelik tanımlama\nnet.add_node(1, isim=\"Taksim\", tur=\"İstasyon\")\n\n# Mevcut bir düğüme nitelik ekleme\nnet.add_node(2)\nnet.nodes[2]['isim'] = \"Kadıköy\"\nnet.nodes[2]['tur'] = \"İstasyon\"\n\n# Toplu düğüm eklerken öznitelikleriyle ekleme (tuple listesi kullanarak)\nnet.add_nodes_from([\n    (3, {\"isim\": \"Ortaköy\", \"tur\": \"Vapur İskelesi\"}),\n    (4, {\"isim\": \"Beşiktaş\", \"tur\": \"Merkez\"})\n])\n\n# Düğüm özniteliklerini görüntüleme\nprint(\"Düğümler ve Nitelikleri:\\n\", list(net.nodes.data()))\n\n\nDüğümler ve Nitelikleri:\n [(1, {'isim': 'Taksim', 'tur': 'İstasyon'}), (2, {'isim': 'Kadıköy', 'tur': 'İstasyon'}), (3, {'isim': 'Ortaköy', 'tur': 'Vapur İskelesi'}), (4, {'isim': 'Beşiktaş', 'tur': 'Merkez'})]\n\n\n\n\n3. Kenar Öznitelikleri & Ağırlık\nKenarlara nitelik atamak, özellikle yol/mesafe veya bağlantı gücü gibi durumları modellemek için kritiktir:\n\n\nKodu Göster\n# Kenarı eklerken nitelik tanımlama (Örn: Ağırlık/Mesafe)\nnet.add_edge(1, 2, mesafe=3.2, ulasim=\"Metro\")\n\n# Toplu kenar eklerken nitelik tanımlama (u, v, dict) yapısı\nnet.add_edges_from([\n    (1, 3, {\"mesafe\": 5.1, \"ulasim\": \"Otobüs\"}),\n    (3, 4, {\"mesafe\": 2.0, \"ulasim\": \"Vapur\"})\n])\n\n# Mevcut bir kenarın özniteliğini değiştirme\nnet.edges[1, 2]['ulasim'] = \"Metro & Tünel\"\n\n# Kenar niteliklerini görüntüleme\nprint(\"Kenarlar ve Nitelikleri:\\n\", list(net.edges.data()))\n\n\nKenarlar ve Nitelikleri:\n [(1, 2, {'mesafe': 3.2, 'ulasim': 'Metro & Tünel'}), (1, 3, {'mesafe': 5.1, 'ulasim': 'Otobüs'}), (3, 4, {'mesafe': 2.0, 'ulasim': 'Vapur'})]\n\n\nÖzel Öznitelik: ‘weight’ (Ağırlık)\nNetworkX algoritma kütüphanelerinde (örneğin en kısa yol algoritmalarında) kenarların arasındaki mesafeyi veya bağlantı gücünü temsil eden weight (ağırlık) özniteliği özel bir yere sahiptir. Algoritmaların çoğu aksi belirtilmedikçe bu isimdeki değişkene göre hesaplama yapar.\nBir kenara ağırlık tanımlama örneği:\n\n\nKodu Göster\nnet.add_edge(2, 4, weight=7.5)\n\n# Ağırlık değerini doğrudan okuma\nprint(\"Kadıköy - Beşiktaş arası ağırlık (mesafe):\", net.edges[2, 4]['weight'])\n\n\nKadıköy - Beşiktaş arası ağırlık (mesafe): 7.5",
+    "crumbs": [
+      "Ana Sayfa",
+      "Ders İçeriği",
+      "2. Eleman İnceleme & Öznitelikler"
+    ]
+  },
+  {
+    "objectID": "04_uretecler_algoritmalar.html",
+    "href": "04_uretecler_algoritmalar.html",
+    "title": "Graf Üreteçleri & Algoritmalar",
+    "section": "",
+    "text": "Ağ analizinde her zaman verileri elle girmek zorunda değiliz. NetworkX, hem teorik çalışmaları simüle etmek için hazır sentetik ağ üreteçleri sunar hem de ağ yapısının matematiksel özelliklerini analiz etmek için gelişmiş algoritmalar barındırır.",
+    "crumbs": [
+      "Ana Sayfa",
+      "Ders İçeriği",
+      "4. Graf Üreteçleri & Algoritmalar"
+    ]
+  },
+  {
+    "objectID": "04_uretecler_algoritmalar.html#graf-üreteçleri",
+    "href": "04_uretecler_algoritmalar.html#graf-üreteçleri",
+    "title": "Graf Üreteçleri & Algoritmalar",
+    "section": "Graf Üreteçleri",
+    "text": "Graf Üreteçleri\n\n1. Klasik Graf Yapıları\nEn sık karşılaşılan temel grafları hızlıca oluşturabiliriz:\n\n\nKodu Göster\nimport networkx as nx\n\n# Tam (Complete) Graf: Her düğümün diğer tüm düğümlere bağlı olduğu graf\nK_5 = nx.complete_graph(5)\nprint(\"Tam Graf (5 Düğümlü) Kenar Sayısı:\", K_5.number_of_edges()) # N*(N-1)/2 = 10\n\n# Yol (Path) Graf: Düğümlerin ardışık olarak zincir şeklinde bağlı olduğu graf\nP_10 = nx.path_graph(10)\nprint(\"Yol Grafı (10 Düğümlü) Kenar Sayısı:\", P_10.number_of_edges()) # N-1 = 9\n\n# Halka (Cycle) Graf: Yol grafının uçlarının birleştiği kapalı yapı\nC_6 = nx.cycle_graph(6)\nprint(\"Halka Grafı (6 Düğümlü) Kenar Sayısı:\", C_6.number_of_edges()) # N = 6\n\n\nTam Graf (5 Düğümlü) Kenar Sayısı: 10\nYol Grafı (10 Düğümlü) Kenar Sayısı: 9\nHalka Grafı (6 Düğümlü) Kenar Sayısı: 6\n\n\n\n\n2. Rastgele Ağ Modelleri\nAğ bilimi araştırmalarında sıklıkla kullanılan iki ünlü rastgele graf üretecine göz atalım:\n\n\nErdős-Rényi Graf Modeli\n\n\\(G(n, p)\\) modelinde \\(n\\) adet düğüm oluşturulur ve her düğüm çifti arasına \\(p\\) olasılığıyla rastgele bir kenar yerleştirilir.\n\n\n\nKodu Göster\n# 50 düğümlü, düğümler arası bağlantı olasılığı %10 (0.1) olan rastgele graf\nER = nx.erdos_renyi_graph(50, 0.1)\nprint(f\"Erdős-Rényi - Düğümler: {ER.number_of_nodes()}, Kenarlar: {ER.number_of_edges()}\")\n\n\nErdős-Rényi - Düğümler: 50, Kenarlar: 133\n\n\n\n\nBarabási-Albert Graf Modeli\n\nGerçek hayattaki ağların birçoğu (İnternet, sosyal ağlar, makale alıntıları) “Zengin daha da zenginleşir” kuralına göre büyür. Barabási-Albert (BA) modeli, derecesi yüksek düğümlerin yeni bağlantılar çekme olasılığının daha yüksek olduğu gerçekçi ağları simüle eder.\n\n\n\nKodu Göster\n# 100 düğümlü, her yeni eklenen düğümün mevcut ağa 2 yeni kenar ile bağlandığı BA grafı\nBA = nx.barabasi_albert_graph(100, 2)\nprint(f\"Barabási-Albert - Düğümler: {BA.number_of_nodes()}, Kenarlar: {BA.number_of_edges()}\")\n\n\nBarabási-Albert - Düğümler: 100, Kenarlar: 196",
+    "crumbs": [
+      "Ana Sayfa",
+      "Ders İçeriği",
+      "4. Graf Üreteçleri & Algoritmalar"
+    ]
+  },
+  {
+    "objectID": "04_uretecler_algoritmalar.html#ağ-analiz-algoritmaları",
+    "href": "04_uretecler_algoritmalar.html#ağ-analiz-algoritmaları",
+    "title": "Graf Üreteçleri & Algoritmalar",
+    "section": "Ağ Analiz Algoritmaları",
+    "text": "Ağ Analiz Algoritmaları\nNetworkX’in en büyük gücü barındırdığı yüzlerce algoritmadır. Burada ders notu kapsamında en popüler algoritmaları pratik bir şehir haritası ağı üzerinden inceleyelim.\nAşağıdaki gibi bir şehir ulaşım grafı tanımlayalım:\n\n\nKodu Göster\n# Şehirler arası mesafeler (Ağırlıklar)\nroad_net = nx.Graph()\nroad_net.add_edge('İstanbul', 'Ankara', weight=450)\nroad_net.add_edge('İstanbul', 'İzmir', weight=480)\nroad_net.add_edge('Ankara', 'İzmir', weight=580)\nroad_net.add_edge('Ankara', 'Adana', weight=490)\nroad_net.add_edge('İzmir', 'Antalya', weight=350)\nroad_net.add_edge('Antalya', 'Adana', weight=320)\n\n\n\n1. En Kısa Yol Analizi (Shortest Path - Dijkstra)\nDijkstra algoritmasını kullanarak İstanbul’dan Adana’ya giden en kısa mesafeli rotayı yol ağırlıklarını hesaba katarak bulalım:\n\n\nKodu Göster\n# En kısa rotayı bulma \nshortest_route = nx.dijkstra_path(road_net, source='İstanbul', target='Adana', weight='weight')\nshortest_length = nx.dijkstra_path_length(road_net, source='İstanbul', target='Adana', weight='weight')\n\nprint(\"İstanbul -&gt; Adana En Kısa Rota:\", shortest_route)\nprint(\"Toplam Yol Mesafesi (km):\", shortest_length)\n\n\nİstanbul -&gt; Adana En Kısa Rota: ['İstanbul', 'Ankara', 'Adana']\nToplam Yol Mesafesi (km): 940\n\n\n\n\n2. Merkezilik Analizleri (Centrality Measures)\nAğ biliminde hangi düğümün (şehrin) ağın yapısı içinde en kritik, en stratejik veya en merkezi noktada olduğunu belirlemek için kullanılır.\n\nA) Derece Merkeziliği\nBir düğümün sahip olduğu komşu sayısına oranını hesaplar. En çok bağlantısı olan şehir en merkezidir.\n\n\nKodu Göster\ndeg_centrality = nx.degree_centrality(road_net)\nprint(\"Derece Merkezilikleri:\")\nfor sehir, score in deg_centrality.items():\n    print(f\" - {sehir}: {score:.2f}\")\n\n\nDerece Merkezilikleri:\n - İstanbul: 0.50\n - Ankara: 0.75\n - İzmir: 0.75\n - Adana: 0.50\n - Antalya: 0.50\n\n\n\n\nB) Arasındalık Merkeziliği\nAğdaki tüm en kısa yolların ne kadarının ilgili düğümün üzerinden geçtiğini ölçer. Bir nevi köprü veya transit geçiş noktası görevini üstlenen düğümleri bulur.\n\n\nKodu Göster\nbet_centrality = nx.betweenness_centrality(road_net, weight='weight')\nprint(\"Arasındalık Merkezilikleri (Köprü Şehirler):\")\nfor sehir, score in bet_centrality.items():\n    print(f\" - {sehir}: {score:.2f}\")\n\n\nArasındalık Merkezilikleri (Köprü Şehirler):\n - İstanbul: 0.00\n - Ankara: 0.17\n - İzmir: 0.17\n - Adana: 0.17\n - Antalya: 0.17\n\n\n\n\nC) PageRank Merkeziliği\nGoogle’ın web sayfalarını sıralamak için geliştirdiği ünlü algoritmadır. Bir düğümün kalitesi ve önemi, ona bağlanan diğer düğümlerin önemi ile ölçülür.\n\n\nKodu Göster\npagerank_scores = nx.pagerank(road_net, weight='weight')\nprint(\"PageRank Skorları:\")\nfor sehir, score in pagerank_scores.items():\n    print(f\" - {sehir}: {score:.2f}\")\n\n\nPageRank Skorları:\n - İstanbul: 0.17\n - Ankara: 0.27\n - İzmir: 0.26\n - Adana: 0.16\n - Antalya: 0.14",
+    "crumbs": [
+      "Ana Sayfa",
+      "Ders İçeriği",
+      "4. Graf Üreteçleri & Algoritmalar"
+    ]
+  }
+]
