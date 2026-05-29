@@ -294,7 +294,7 @@ window.Quarto = {
 <h2 class="anchored" data-anchor-id="grafın-elemanlarını-inceleme">Grafın Elemanlarını İnceleme</h2>
 <p>NetworkX, grafın güncel durumunu izlemek için Set-like Views adı verilen veri yapıları kullanır. Bu yapılar salt-okunurdur ve graf güncellendikçe otomatik olarak güncellenirler.</p>
 <p>İlk olarak üzerinde çalışacağımız temel bir graf oluşturalım:</p>
-<div id="bc275366" class="cell" data-execution_count="1">
+<div id="fd4e9d12" class="cell" data-execution_count="1">
 <details open="" class="code-fold">
 <summary>Kodu Göster</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> networkx <span class="im">as</span> nx</span>
@@ -306,7 +306,7 @@ window.Quarto = {
 <section id="düğümleri-ve-kenarları-inceleme" class="level3">
 <h3 class="anchored" data-anchor-id="düğümleri-ve-kenarları-inceleme">1. Düğümleri ve Kenarları İnceleme</h3>
 <p>Düğümleri <code>G.nodes</code> ve kenarları <code>G.edges</code> ile sorgularız:</p>
-<div id="f6598ae9" class="cell" data-execution_count="2">
+<div id="61550982" class="cell" data-execution_count="2">
 <details open="" class="code-fold">
 <summary>Kodu Göster</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Düğümler:"</span>, G.nodes)</span>
@@ -329,7 +329,7 @@ Kenarlar: [(1, 2), (1, 3), (2, 4), (3, 4)]</code></pre>
 <li><p><strong>düğüm - kenar komşuluğu:</strong> <span class="math inline">\(G=(V,E)\)</span> bir graf ve <span class="math inline">\(v \in V\)</span>, <span class="math inline">\(e \in E\)</span> olsun. Eğer <span class="math inline">\(v \in e\)</span> ise <span class="math inline">\(v\)</span> ve <span class="math inline">\(e\)</span> komşudur denir.</p></li>
 </ol>
 <p>Bir düğümün bağlı olduğu diğer düğümleri (komşularını) görmek için <code>G.adj</code> veya <code>G[düğüm_id]</code> yapısını kullanırız:</p>
-<div id="63193da0" class="cell" data-execution_count="3">
+<div id="0e214899" class="cell" data-execution_count="3">
 <details open="" class="code-fold">
 <summary>Kodu Göster</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1 nolu düğümün komşuları</span></span>
@@ -349,7 +349,7 @@ Kenarlar: [(1, 2), (1, 3), (2, 4), (3, 4)]</code></pre>
 <blockquote class="blockquote">
 <p><strong>Bir düğümün derecesi:</strong> <span class="math inline">\(G=(V,E)\)</span> bir graf olsun. <span class="math inline">\(v\)</span> düğümünün derecesi <span class="math inline">\(v\)</span>’ye bitişik olan kendinden bağımsız döngü kenarlarının sayısına, <span class="math inline">\(v\)</span>’deki kendine döngü kenarlarının sayısının iki katının eklenmesiyle elde edilir. <span class="math inline">\(deg(v)\)</span> ile gösterilir. <span class="math display">\[deg(v)= |\{e \in E : \exists v \in V: e = \{u,v\}\}| + 2 * |\{e \in E : e=\{v\}\}|\]</span></p>
 </blockquote>
-<div id="d79d2267" class="cell" data-execution_count="4">
+<div id="ce48a50c" class="cell" data-execution_count="4">
 <details open="" class="code-fold">
 <summary>Kodu Göster</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Tüm düğümlerin dereceleri</span></span>
@@ -378,7 +378,7 @@ Kenarlar: [(1, 2), (1, 3), (2, 4), (3, 4)]</code></pre>
 <section id="graf-öznitelikleri" class="level3">
 <h3 class="anchored" data-anchor-id="graf-öznitelikleri">1. Graf Öznitelikleri</h3>
 <p>Bir grafın kendisine ait genel bilgileri tanımlamak için kullanılır:</p>
-<div id="ad5d1e8c" class="cell" data-execution_count="5">
+<div id="c8706029" class="cell" data-execution_count="5">
 <details open="" class="code-fold">
 <summary>Kodu Göster</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Tanımlama esnasında öznitelik ekleme</span></span>
@@ -398,7 +398,7 @@ Güncel Öznitelikler: {'isim': 'Şehir Metro Ağı', 'ulke': 'Türkiye', 'tarih
 <section id="düğüm-öznitelikleri" class="level3">
 <h3 class="anchored" data-anchor-id="düğüm-öznitelikleri">2. Düğüm Öznitelikleri</h3>
 <p>Düğümlere özel nitelikler eklemenin yolları:</p>
-<div id="ce37ddad" class="cell" data-execution_count="6">
+<div id="8cb7d383" class="cell" data-execution_count="6">
 <details open="" class="code-fold">
 <summary>Kodu Göster</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Düğümü eklerken nitelik tanımlama</span></span>
@@ -427,7 +427,7 @@ Güncel Öznitelikler: {'isim': 'Şehir Metro Ağı', 'ulke': 'Türkiye', 'tarih
 <section id="kenar-öznitelikleri-ağırlık" class="level3">
 <h3 class="anchored" data-anchor-id="kenar-öznitelikleri-ağırlık">3. Kenar Öznitelikleri &amp; Ağırlık</h3>
 <p>Kenarlara nitelik atamak, özellikle yol/mesafe veya bağlantı gücü gibi durumları modellemek için kritiktir:</p>
-<div id="0a94a28c" class="cell" data-execution_count="7">
+<div id="246c9290" class="cell" data-execution_count="7">
 <details open="" class="code-fold">
 <summary>Kodu Göster</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Kenarı eklerken nitelik tanımlama (Örn: Ağırlık/Mesafe)</span></span>
@@ -453,7 +453,7 @@ Güncel Öznitelikler: {'isim': 'Şehir Metro Ağı', 'ulke': 'Türkiye', 'tarih
 <p>Özel Öznitelik: ‘weight’ (Ağırlık)</p>
 <p>NetworkX algoritma kütüphanelerinde (örneğin en kısa yol algoritmalarında) kenarların arasındaki mesafeyi veya bağlantı gücünü temsil eden <strong><code>weight</code></strong> (ağırlık) özniteliği özel bir yere sahiptir. Algoritmaların çoğu aksi belirtilmedikçe bu isimdeki değişkene göre hesaplama yapar.</p>
 <p>Bir kenara ağırlık tanımlama örneği:</p>
-<div id="8b01a5f8" class="cell" data-execution_count="8">
+<div id="cc8c9493" class="cell" data-execution_count="8">
 <details open="" class="code-fold">
 <summary>Kodu Göster</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>net.add_edge(<span class="dv">2</span>, <span class="dv">4</span>, weight<span class="op">=</span><span class="fl">7.5</span>)</span>
